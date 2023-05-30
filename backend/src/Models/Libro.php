@@ -4,11 +4,11 @@ namespace Raiz\Models;
 
 class Libro extends ModelBase{
    private string $titulo;
-
+   /** @var Editorial */
    private Editorial $editorial;
     
    private array $autor;
-    
+     /** @var Genero */
    private  Genero $genero;
     
    private int $cant_paginas;
