@@ -9,10 +9,14 @@ class Prestamo extends ModelBase{
     private Libro $libro;
     private string $fecha_desde;
     private string $fecha_hasta;
-    private string $fecha_dev;
-    public function __construct()
+    private ?string $fecha_dev;
+    public function __construct(Socio $socio, Libro $libro, string $fecha_desde, string $fecha_hasta)
     {
-        
+        $this->socio = $socio;
+        $this->libro = $libro;
+        $this->fecha_desde = $fecha_desde;
+        $this->fecha_hasta = $fecha_hasta;
+        $this->fecha_dev = null;
     }
 
 
