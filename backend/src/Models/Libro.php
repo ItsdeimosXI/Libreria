@@ -14,7 +14,11 @@ class Libro extends ModelBase{
    private int $cant_paginas;
     
    private int $anio_publicacion;
-   public function __construct(string $titulo, Editorial $editorial, array $autor, Genero $genero, int $cant_paginas, int $anio_publicacion)
+   const ACTIVO = 'Activo' ;
+   const  PRESTADO = ' Prestado' ;
+   const INACTIVO = 'Inactivo'; 
+   private string $estado;
+   public function __construct(string $titulo, Editorial $editorial, array $autor, Genero $genero, int $cant_paginas, int $anio_publicacion, string $estado)
    {
     $this->titulo = $titulo;
     $this-> editorial = $editorial;
@@ -22,6 +26,50 @@ class Libro extends ModelBase{
     $this->genero = $genero;
     $this->cant_paginas = $cant_paginas;
     $this-> anio_publicacion = $anio_publicacion;
+    $this->estado = static::ACTIVO;
    }
+   public function GetTitulo(){
+      return $this->titulo;
+   }
+   public function SetTitulo( string $titulo){
+      $this->titulo = $titulo;
+   }
+   public function GetEditorial(){
+      return $this->editorial;
+   }
+   public function SetEditorial( Editorial $editorial){
+      $this->editorial = $editorial;
+   }
+   public function GetAutor(){
+      return $this->autor;
+   }
+   public function SetAutor( array $autor){
+      $this->autor = $autor;
+   }
+   public function GetGenero(){
+      return $this->genero;
+   }
+   public function SetGenero( Genero $genero){
+      $this->genero = $genero;
+   }
+   public function GetCantPag(){
+      return $this->cant_paginas;
+   }
+   public function SetCantPag( int $cant_paginas){
+      $this->cant_paginas = $cant_paginas;
+   }
+   public function GetAnioPublic(){
+      return $this->anio_publicacion;
+   }
+   public function SetAnioPublic( int $anio_publicacion){
+      $this->anio_publicacion = $anio_publicacion;
+   }
+   public function GetEstado(){
+      return $this->estado;
+   }
+   public function SetEstado($estado){
+      $this->estado = $estado;
+   }
+
 }
 
