@@ -30,5 +30,22 @@ class Prestamo extends ModelBase{
     public function SetLibro(Libro $libro){
         $this->libro = $libro;
     }
-    
+    public function GetFechaDesde(){
+        $this->fecha_desde;
+    }
+    public function SetFechaDesde($fecha_desde){
+        $this->fecha_desde = $fecha_desde;
+    }
+    public function GetFechaHasta(){
+        $this->fecha_hasta;
+    }
+    public function SetFechaHasta($fecha_hasta){
+        $this->fecha_hasta = $fecha_hasta;
+    }
+    public function GetFechaDev(){
+        $this->fecha_dev;
+    }
+    public function SetFechaDev($fecha_dev){
+        $this->fecha_dev = $fecha_dev;
+    }
 }
