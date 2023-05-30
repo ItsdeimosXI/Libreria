@@ -18,6 +18,17 @@ class Prestamo extends ModelBase{
         $this->fecha_hasta = $fecha_hasta;
         $this->fecha_dev = null;
     }
-
-
+    public function GetSoscio(){
+        return $this->socio;
+    }
+    public function SetSocio(Socio $socio){
+        $this->socio = $socio;
+    }
+    public function GetLibro(){
+        return $this->libro;
+    }
+    public function SetLibro(Libro $libro){
+        $this->libro = $libro;
+    }
+    
 }
