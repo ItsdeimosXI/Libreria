@@ -23,5 +23,23 @@ class Categoria extends ModelBase
     {
         $this->descripcion = $descripcion;
     }
-    
+    public function GetActivo(){
+        return $this->activo;
+    }
+    public function SetActivo(int $activo){
+        $this->activo = $activo;
+    }
+    public static function deserializar(array $datos): self
+    {
+        return new categoria(
+            activo: $datos["activo"],
+            descripcion: $datos["descripcion"]
+        );
+    }
+    /** @Return mixed[] */
+    public function serializar(): array
+    {
+        $serializar = array("descripcion" => $this->GetDescripcion(), "activo" => $this->GetActivo() );
+        return $serializar;
+    }
 }

@@ -30,4 +30,17 @@ class Autor extends ModelBase{
     {
         $this->activo = $activo;
     }
+    public static function deserializar(array $datos): self
+    {
+        return new autor(
+            activo: $datos["activo"],
+            nombre_apellido: $datos["nombre_apellido"]
+        );
+    }
+    /** @Return mixed[] */
+    public function serializar(): array
+    {
+        $serializar = array("nombre_apellido" => $this->Getnombre(), "activo" => $this->GetEsactivo() );
+        return $serializar;
+    }
 }

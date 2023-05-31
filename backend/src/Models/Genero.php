@@ -31,4 +31,17 @@ class Genero extends ModelBase
     {
         $this->activo = $activo;
     }
+    public static function deserializar(array $datos): self
+    {
+        return new Genero(
+            activo: $datos["activo"],
+            descripcion: $datos["descripcion"]
+        );
+    }
+    /** @Return mixed[] */
+    public function serializar(): array
+    {
+        $serializar = array("descripcion" => $this->GetDescripcion(), "activo" => $this->GetEsactivo() );
+        return $serializar;
+    }
 }

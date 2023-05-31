@@ -26,4 +26,17 @@ class Editorial extends ModelBase{
     {
         $this->activo = $activo;
     }
+    public static function deserializar(array $datos): self
+    {
+        return new Editorial(
+            activo: $datos["activo"],
+            nombre: $datos["nombre"]
+        );
+    }
+    /** @Return mixed[] */
+    public function serializar(): array
+    {
+        $serializar = array("nombre_apellido" => $this->Getnombre(), "activo" => $this->GetEsactivo() );
+        return $serializar;
+    }
 }

@@ -70,6 +70,23 @@ class Libro extends ModelBase{
    public function SetEstado($estado){
       $this->estado = $estado;
    }
-
+   public static function deserializar(array $datos): self
+   {
+       return new Libro(
+           titulo: $datos["titulo"],
+           editorial: $datos["editorial"],
+           autor: $datos["autor"],
+           genero: $datos["genero"],
+       cant_paginas: $datos["cantpaginas"],
+       anio_publicacion: $datos["año_publicacion"],
+       estado: $datos["estado"]
+       );
+   }
+   /** @Return mixed[] */
+   public function serializar(): array
+   {
+       $serializar = array("titulo" => $this->GetTitulo(), "editorial" => $this->GetEditorial(), "autor" => $this->GetAutor(), "genero" => $this->GetGenero(), "cant_paginas" => $this->GetCantPag(), "año_publicacion" => $this->GetAnioPublic(), "estado" => $this->GetEstado());
+       return $serializar;
+   }
 }
 

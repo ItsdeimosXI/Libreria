@@ -48,4 +48,20 @@ class Prestamo extends ModelBase{
     public function SetFechaDev($fecha_dev){
         $this->fecha_dev = $fecha_dev;
     }
+
+    public static function deserializar(array $datos): self
+    {
+        return new Prestamo(
+            socio: $datos["socio"],
+            libro: $datos["libro"],
+            fecha_desde: $datos["fecha_desde"],
+            fecha_hasta: $datos["fecha_hasta"]
+        );
+    }
+    /** @Return mixed[] */
+    public function serializar(): array
+    {
+        $serializar = array("socio" => $this->GetSoscio(), "libro" =>  $this->GetLibro(), "fecha_desde" =>  $this->GetFechaDesde(), "fecha_hasta" => $this->GetFechaHasta(), "fecha_dev" =>  $this->GetFechaDev());
+        return $serializar;
+    }
 }
