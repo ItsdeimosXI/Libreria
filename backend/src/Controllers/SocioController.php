@@ -58,8 +58,4 @@ class SocioController implements InterfaceController{
         SocioDAO::borrar($id);
         
     }
-    
-    
-
-
 }
