@@ -1,6 +1,6 @@
 {
     "name": "eduardo/pwd2023",
-    "description": "prueba",
+    "description": "PWD",
     "scripts": {
         "test": "./vendor/bin/phpunit",
         "version": "phpunit --version"
@@ -13,7 +13,7 @@
     },
     "authors": [
         {
-            "name": "eduardo"
+            "name": "deimos"
         }
     ],
     "minimum-stability": "stable",
