@@ -6,8 +6,6 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Raiz\Controllers\SocioController;
 
 
-$app = AppFactory::create();
-
 $app->addErrorMiddleware(displayErrorDetails: true, logErrors: true, logErrorDetails: true);
 
 
@@ -16,7 +14,7 @@ $app->addErrorMiddleware(displayErrorDetails: true, logErrors: true, logErrorDet
 // ************************************************ //
 // ---------- Listar todos los Registros ---------- //
 
-$app->get('/socios', function (Request $req, Response $res, array $args) {
+$app->get('/apiv1/socios', function (Request $req, Response $res, array $args) {
     $payload = Json_Encode(SocioController::listar(), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
@@ -24,7 +22,7 @@ $app->get('/socios', function (Request $req, Response $res, array $args) {
 
 //  ****** ------ Buscar por Id ------- ************* //
 
-$app->get('/socios/{id}', function (Request $req, Response $res, array $args) {
+$app->get('/apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
     $payload = Json_Encode(SocioController::encontrarUno($args["id"]), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
@@ -32,14 +30,14 @@ $app->get('/socios/{id}', function (Request $req, Response $res, array $args) {
 
 // ---- Crear nuevo regitro ---- //
 
-$app->post('/socios/nuevo', function (Request $req, Response $res, array $args) {
+$app->post('/apiv1/socios/nuevo', function (Request $req, Response $res, array $args) {
     $payload = Json_Encode(SocioController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
 
 // ---- Modificar registro existente ---- //
-$app->put('/socios/{id}', function (Request $req, Response $res, array $args) {
+$app->put('/apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
     $payload = Json_Encode(SocioController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
@@ -47,7 +45,7 @@ $app->put('/socios/{id}', function (Request $req, Response $res, array $args) {
 
 // ---- Borrar registro existente ---- //
 
-$app->delete('/socios/{id}', function (Request $req, Response $res, array $args) {
+$app->delete('apiv1/socios/{id}', function (Request $req, Response $res, array $args) {
     $payload = Json_Encode(SocioController::borrar($args["id"]), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");

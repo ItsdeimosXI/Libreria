@@ -5,6 +5,9 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Raiz\Controllers\SocioController;
 
+require __DIR__ . '../../vendor/autoload.php';
+
+$app = AppFactory::create();
 
 $app->addErrorMiddleware(displayErrorDetails: true, logErrors: true, logErrorDetails: true);
 
@@ -50,5 +53,3 @@ $app->delete('apiv1/socios/{id}', function (Request $req, Response $res, array $
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
-
-

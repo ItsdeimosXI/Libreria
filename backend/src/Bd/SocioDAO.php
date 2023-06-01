@@ -12,7 +12,7 @@ class SocioDAO implements InterfaceDAO
 
     public static function listar(): array
     {
-        $sql = 'SELECT * FROM socios';
+        $sql = 'SELECT * FROM socio';
         $listaSocios = ConectarBD::leer(sql: $sql);
         $socios = [];
         foreach ($listaSocios as $socio) {
