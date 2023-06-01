@@ -4,44 +4,44 @@ namespace Raiz\Bd;
 
 use Raiz\Aux\Serializador;
 use Raiz\Bd\InterfaceDAO;
-use Raiz\Models\Socio;
+use Raiz\Models\Editorial;
 
 
-class SocioDAO implements InterfaceDAO
+class EditorialDAO implements InterfaceDAO
 {
 
     public static function listar(): array
     {
-        $sql = 'SELECT * FROM socios';
-        $listaSocios = ConectarBD::leer(sql: $sql);
-        $socios = [];
-        foreach ($listaSocios as $socio) {
-            $socios[] = Socio::deserializar($socio);
+        $sql = 'SELECT * FROM Editorial';
+        $listaEditorial = ConectarBD::leer(sql: $sql);
+        $Editorial = [];
+        foreach ($listaEditorial as $Editorial) {
+            $Editorial[] = Editorial::deserializar($Editorial);
         }
-        return $socios;
+        return $Editorial;
     }
-    public static function encontrarUno(string $id): ?Socio
+    public static function encontrarUno(string $id): ?Editorial
     {
-        $sql = 'SELECT * FROM socios WHERE id =:id;';
-        $socio = ConectarBD::leer(sql: $sql, params: [':id' => $id]);
-        if (count($socio) === 0) {
+        $sql = 'SELECT * FROM Editorial WHERE id =:id;';
+        $Editorial = ConectarBD::leer(sql: $sql, params: [':id' => $id]);
+        if (count($Editorial) === 0) {
            return null;
         } else {
-            $socio = Socio::deserializar($socio[0]);
-            return $socio;
+            $Editorial = Editorial::deserializar($Editorial[0]);
+            return $Editorial;
         }
     }
 
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO socios (id, nombre_apellido, dni) VALUES (:id, :nombre_apellido, :dni)';
+        $sql = 'INSERT INTO Editorial (id, nombre, activo) VALUES (:id, :nombre, :activo)';
         ConectarBD::escribir(
             sql: $sql,
             params: [
                 ':id' => $params['id'],
-                ':nombre_apellido' => $params['nombre_apellido'],
-                ':dni' => $params['dni']
+                ':nombre' => $params['nombre'],
+                ':activo' => $params['activo']
             ]
         );
     }
@@ -49,7 +49,7 @@ class SocioDAO implements InterfaceDAO
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE socios SET nombre =:nombre WHERE id=:id';
+        $sql = 'UPDATE Editorial SET nombre =:nombre WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [
@@ -60,7 +60,7 @@ class SocioDAO implements InterfaceDAO
     }
     public static function borrar(string $id)
     {
-        $sql = 'DELETE FROM socios WHERE id=:id';
+        $sql = 'DELETE FROM Editorial WHERE id=:id';
         ConectarBD::escribir(sql: $sql, params: [':id' => $id]);
     }
 }
