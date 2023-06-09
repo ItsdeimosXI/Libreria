@@ -10,8 +10,9 @@ class Categoria extends ModelBase
 {
     private string $descripcion;
     private int $activo;
-    public function __construct(string $descripcion, int $activo)
+    public function __construct(string $descripcion, int $activo, int $id)
     {
+        parent::__construct($id);
         $this->activo = $activo;
         $this->descripcion = $descripcion;
     }
@@ -32,6 +33,7 @@ class Categoria extends ModelBase
     public static function deserializar(array $datos): self
     {
         return new categoria(
+            id: $datos['id'] === null ? 0 : intVal($datos['id']),
             activo: $datos["activo"],
             descripcion: $datos["descripcion"]
         );

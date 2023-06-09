@@ -5,8 +5,9 @@ namespace Raiz\Models;
 class Editorial extends ModelBase{
     private string $nombre;
     private int $activo;
-    public function __construct(string $nombre, int $activo)
+    public function __construct(string $nombre, int $activo, int $id)
     {
+        parent::__construct($id);
         $this->nombre = $nombre;
         $this->activo = $activo;
     }
@@ -29,6 +30,7 @@ class Editorial extends ModelBase{
     public static function deserializar(array $datos): self
     {
         return new Editorial(
+            id: $datos['id'] === null ? 0 : intVal($datos['id']),
             activo: $datos["activo"],
             nombre: $datos["nombre"]
         );

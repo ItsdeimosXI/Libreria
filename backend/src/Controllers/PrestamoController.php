@@ -35,8 +35,6 @@ class PrestamoController implements InterfaceController{
             return $Prestamo->serializar();
         }
         
-        
-        
     }
 
     public static function crear(array $parametros): array

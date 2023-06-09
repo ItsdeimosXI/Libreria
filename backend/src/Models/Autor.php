@@ -9,8 +9,9 @@ class Autor extends ModelBase{
     private string $nombre_apellido;
     private int $activo;
     public function __construct(string $nombre_apellido
-    , int $activo)
+    , int $activo, int $id)
     {
+        parent::__construct($id);
         $this->nombre_apellido = $nombre_apellido;
         $this->activo = $activo;
     }
@@ -33,6 +34,7 @@ class Autor extends ModelBase{
     public static function deserializar(array $datos): self
     {
         return new autor(
+            id: $datos['id'] === null ? 0 : intVal($datos['id']),
             activo: $datos["activo"],
             nombre_apellido: $datos["nombre_apellido"]
         );

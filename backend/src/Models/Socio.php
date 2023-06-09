@@ -5,71 +5,66 @@ declare(strict_types=1);
 namespace Raiz\Models;
 
 
-class Socio extends Persona
+class Socio extends ModelBase
 {
     private string  $nombre_apellido;
-    private   string $fecha_alta;
+    private string $fecha_alta;
     private int $activo;
     private int $telefono;
     private string $direccion;
-    private int $dni;
+
     public function __construct(
+        int $id,
         string  $nombre_apellido,
         string $fecha_alta,
         int $activo,
-        int $dni,
         int $telefono,
         string $direccion
     ) {
-        parent::__construct($nombre_apellido, $dni);
+        parent::__construct($id);
+        $this->nombre_apellido = $nombre_apellido;
         $this->telefono = $telefono;
         $this->fecha_alta = $fecha_alta;
         $this->activo = $activo;
         $this->direccion = $direccion;
     }
-    public function Setnombreapellido( string $Nombre_apellido){
+    public function Setnombreapellido(string $Nombre_apellido)
+    {
         $this->nombre_apellido = $Nombre_apellido;
-        return $this->nombre_apellido;
     }
     public function Getnombre()
     {
         return $this->nombre_apellido;
     }
-    public function SetDireccion( string $direccion){
+    public function SetDireccion(string $direccion)
+    {
         $this->direccion = $direccion;
-        return $this->direccion;
     }
     public function GetDireccion()
     {
         return $this->direccion;
     }
-    public function SetTelefono( int $telefono){
+    public function SetTelefono(int $telefono): void
+    {
         $this->telefono = $telefono;
-        return $this->telefono;
     }
-    public function GetTelefono()
+    public function getTelefono()
     {
         return $this->telefono;
     }
-    
-    public function SetDNI( int $dni){
-        $this->dni = $dni;
-        return $this->fecha_alta;
-    }
-    public function GetDNI()
+
+
+    public function setFechaAlta(string $fecha_alta)
     {
-        return $this->dni;
+
+        return $this->fecha_alta = $fecha_alta;
     }
-    public function setFechaAlta( string $fecha){
-        $this->fecha_alta = $fecha;
-        return $this->fecha_alta;
-    }
-    public function Getfechaalta()
+    public function getFechaAlta()
     {
         return $this->fecha_alta;
     }
 
-    public function GetEsactivo()
+    public function getEsActivo()
     {
         return $this->activo;
     }
@@ -77,21 +72,29 @@ class Socio extends Persona
     {
         $this->activo = $activo;
     }
+
     public static function deserializar(array $datos): self
     {
         return new socio(
-            activo: $datos["activo"],
+            id: $datos['id'] === null ? 0 : intVal($datos['id']),
+            activo: intVal($datos["activo"]),
             fecha_alta: $datos["fecha_alta"],
-            dni: $datos["dni"],
             nombre_apellido: $datos["nombre_apellido"],
             direccion: $datos["direccion"],
-            telefono: $datos["telefono"]
+            telefono: intVal($datos["telefono"])
         );
     }
     /** @Return mixed[] */
     public function serializar(): array
     {
-        $serializar = array("dni" => $this->GetDni(), "nombre" => $this->Getnombre(), "Activo" => $this->GetEsactivo(), "Fecha alta" => $this->Getfechaalta(), "Telefono" => $this->GetTelefono(), "Direccion" => $this->GetDireccion());
+        $serializar = array(
+            'id'=>$this->getId(),
+            "nombre_apellido" => $this->Getnombre(), 
+            "activo" => $this->GetEsactivo(), 
+            "fecha_alta" => $this->Getfechaalta(), 
+            "telefono" => $this->GetTelefono(), 
+            "direccion" => $this->GetDireccion()
+        );
         return $serializar;
     }
 }
