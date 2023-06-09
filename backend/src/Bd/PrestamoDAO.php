@@ -61,18 +61,16 @@ class PrestamoDAO implements InterfaceDAO
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO prestamo (titulo, id_genero, id_categoria, cant_paginas, anio, estado, id_editorial) 
-        VALUES (:titulo, :id_genero, :id_categoria, :cant_paginas, :anio, :estado, :id_editorial);';
+        $sql = 'INSERT INTO prestamo (socio , libro, fecha_desde, fecha_hasta, $fecha_dev) 
+        VALUES (:socio, :libro, :fecha_desde, :fecha_hasta, :fecha_dev);';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':titulo' => $params['titulo'],
-                ':id_genero' => $params['genero']->getId(),
-                ':id_categoria' => $params['categoria']->getId(),
-                ':cant_paginas' => $params['cant_paginas'],
-                ':anio' => $params['anio'],
-                ':estado' => $params['estado'],
-                ':id_editorial' => $params['editorial']->getId(),
+                ':socio' => $params['socio']->getId(),
+                ':libro' => $params['libro']->getId(),
+                ':fecha_desde' => $params['fecha_desde'],
+                ':fecha_hasta' => $params['fecha_hasta'],
+                ':fecha_dev' => $params['fecha_dev'],
             ]
         );
         
@@ -92,12 +90,12 @@ class PrestamoDAO implements InterfaceDAO
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE prestamos SET nombre =:nombre WHERE id=:id';
+        $sql = 'UPDATE prestamos SET socio =:socio WHERE id_socio=:id_socio';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':id' => $params['id'],
-                ':nombre' => $params['nombre'],
+                ':id_socio' => $params['id_socio'],
+                ':socio' => $params['socio'],
             ]
         );
     }
@@ -112,9 +110,6 @@ class PrestamoDAO implements InterfaceDAO
         $consulta = $cnx->prepare($sql);
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC)[0]["id"];
-       
-
-
 
     }
     public static function actualizarEstado(Serializador $instancia): void
