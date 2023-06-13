@@ -9,11 +9,11 @@ use Raiz\Models\ModelBase;
 class Genero extends ModelBase
 {
     private string $descripcion;
-    private int $activo;
-    public function __construct(string $descripcion, int $activo, int $id)
+
+    public function __construct(string $descripcion, int $id)
     {
         parent::__construct($id);
-        $this->activo = $activo;
+
         $this->descripcion = $descripcion;
     }
     public function GetDescripcion()
@@ -36,14 +36,14 @@ class Genero extends ModelBase
     {
         return new Genero(
             id: $datos['id'] === null ? 0 : intVal($datos['id']),
-            activo: $datos["activo"],
+
             descripcion: $datos["descripcion"]
         );
     }
     /** @Return mixed[] */
     public function serializar(): array
     {
-        $serializar = array("descripcion" => $this->GetDescripcion(), "activo" => $this->GetEsactivo() );
+        $serializar = array("descripcion" => $this->GetDescripcion() );
         return $serializar;
     }
 }

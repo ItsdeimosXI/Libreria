@@ -19,7 +19,7 @@ class LibroDAO implements InterfaceDAO
         $listaLibros = $consulta->fetchAll(PDO::FETCH_ASSOC);
         $libros = [];
         foreach ($listaLibros as $libro) {
-            $libro['categoria'] = CategoriaDAO::encontrarUno($libro['id_categoria']);
+            $libro['categoria'] = CategoriasDAO::encontrarUno($libro['id_categoria']);
             $libro['genero'] = GeneroDAO::encontrarUno($libro['id_genero']);
             $libro['editorial'] = EditorialDAO::encontrarUno($libro['id_editorial']);
             $libro['autor'][] = static::buscarEscritoresporLibro($libro["id"]);
@@ -50,7 +50,7 @@ class LibroDAO implements InterfaceDAO
             return null;
         } else {
             
-            $libro[0]['categoria'] = CategoriaDAO::encontrarUno($libro[0]['id_categoria']);
+            $libro[0]['categoria'] = CategoriasDAO::encontrarUno($libro[0]['id_categoria']);
             $libro[0]['genero'] = GeneroDAO::encontrarUno($libro[0]['id_genero']);
             $libro[0]['editorial'] = EditorialDAO::encontrarUno($libro[0]['id_editorial']);
             $autoresLibros[] = static::buscarEscritoresporLibro($libro[0]["id"]);

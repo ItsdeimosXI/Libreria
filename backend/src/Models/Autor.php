@@ -7,13 +7,13 @@ use Raiz\Models\ModelBase;
 
 class Autor extends ModelBase{
     private string $nombre_apellido;
-    private int $activo;
+
     public function __construct(string $nombre_apellido
-    , int $activo, int $id)
+    , int $id)
     {
         parent::__construct($id);
         $this->nombre_apellido = $nombre_apellido;
-        $this->activo = $activo;
+
     }
     public function Setnombreapellido( string $Nombre_apellido){
         $this->nombre_apellido = $Nombre_apellido;
@@ -35,14 +35,13 @@ class Autor extends ModelBase{
     {
         return new autor(
             id: $datos['id'] === null ? 0 : intVal($datos['id']),
-            activo: $datos["activo"],
             nombre_apellido: $datos["nombre_apellido"]
         );
     }
     /** @Return mixed[] */
     public function serializar(): array
     {
-        $serializar = array("nombre_apellido" => $this->Getnombre(), "activo" => $this->GetEsactivo() );
+        $serializar = array("nombre_apellido" => $this->Getnombre());
         return $serializar;
     }
 }

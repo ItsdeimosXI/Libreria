@@ -4,6 +4,7 @@ namespace Raiz\Bd;
 use Raiz\Models\prestamo;
 use Raiz\Seri\Serializador;
 use PDO;
+use Raiz\Models\Libro;
 
 class PrestamoDAO implements InterfaceDAO
 {
@@ -18,10 +19,10 @@ class PrestamoDAO implements InterfaceDAO
         $prestamos = [];
         foreach ($listaprestamos as $prestamo) {
             $prestamo['socio'] = SocioDAO::encontrarUno($prestamo['id_socio']);
-            $prestamo['prestamo'] = prestamoDAO::encontrarUno($prestamo['id_prestamo']);
+            $prestamo['libro'] = LibroDAO::encontrarUno($prestamo['id_libro']);
             $prestamos[] = prestamo::deserializar($prestamo);
+            
         }
-        
         return $prestamos;
     }
     public static function BuscarPrestamos($id)

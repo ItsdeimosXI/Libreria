@@ -2,7 +2,7 @@
 
 namespace Raiz\Bd;
 
-use Raiz\Aux\Serializador;
+use Raiz\Seri\Serializador;
 use Raiz\Bd\InterfaceDAO;
 use Raiz\Models\Autor;
 
@@ -12,7 +12,7 @@ class AutorDAO implements InterfaceDAO
 
     public static function listar(): array
     {
-        $sql = 'SELECT * FROM Autor';
+        $sql = 'SELECT * FROM autores';
         $listaAutor = ConectarBD::leer(sql: $sql);
         $Autor = [];
         foreach ($listaAutor as $Autor) {
@@ -22,7 +22,7 @@ class AutorDAO implements InterfaceDAO
     }
     public static function encontrarUno(string $id): ?Autor
     {
-        $sql = 'SELECT * FROM Autor WHERE id =:id;';
+        $sql = 'SELECT * FROM autores WHERE id =:id;';
         $Autor = ConectarBD::leer(sql: $sql, params: [':id' => $id]);
         if (count($Autor) === 0) {
            return null;

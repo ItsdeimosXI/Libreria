@@ -1,7 +1,7 @@
 <?php
 namespace Raiz\Controllers;
 
-use Raiz\Bd\CategoriaDAO;
+use Raiz\Bd\CategoriasDAO;
 use Raiz\Models\Categoria;
 
 class CategoriaController implements InterfaceController{
@@ -17,7 +17,7 @@ class CategoriaController implements InterfaceController{
     public static function listar(): array
     {
         $Categoria = [];
-        $listadoCategoria = CategoriaDAO::listar();
+        $listadoCategoria = CategoriasDAO::listar();
         foreach($listadoCategoria as $Categoria){
             $Categoria[] = $Categoria->serializar();
         }
@@ -28,7 +28,7 @@ class CategoriaController implements InterfaceController{
     
     public static function encontrarUno(string $id): ?array
     {
-        $Categoria = CategoriaDAO::encontrarUno($id);
+        $Categoria = CategoriasDAO::encontrarUno($id);
         if($Categoria===null){
             return $Categoria;
         }else{
@@ -42,20 +42,20 @@ class CategoriaController implements InterfaceController{
     public static function crear(array $parametros): array
     {
         $Categoria = Categoria::deserializar($parametros);
-        CategoriaDAO::crear($Categoria);
+        CategoriasDAO::crear($Categoria);
         return $Categoria->serializar();
     }
 
     public static function actualizar(array $parametros): array
     {
         $Categoria = Categoria::deserializar($parametros);
-        CategoriaDAO::actualizar($Categoria);
+        CategoriasDAO::actualizar($Categoria);
         return $Categoria->serializar();
     }
 
     public static function borrar(string $id):void
     {
-        CategoriaDAO::borrar($id);
+        CategoriasDAO::borrar($id);
         
     }
 }

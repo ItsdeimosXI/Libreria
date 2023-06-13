@@ -73,8 +73,8 @@ class Libro extends ModelBase
     public function getAutores(): array
     {
         $listaAutores =[];
-        foreach($this->autor as $autor){
-            $listaAutores = $autor->serializar();
+        foreach($this->autor as $autores){
+            $listaAutores = $autores->serializar();
         }
         return $listaAutores;
         

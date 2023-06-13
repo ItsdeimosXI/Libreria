@@ -2,7 +2,7 @@
 
 namespace Raiz\Bd;
 
-use Raiz\Aux\Serializador;
+use Raiz\Seri\Serializador;
 use Raiz\Bd\InterfaceDAO;
 use Raiz\Models\Genero;
 
@@ -12,7 +12,7 @@ class GeneroDAO implements InterfaceDAO
 
     public static function listar(): array
     {
-        $sql = 'SELECT * FROM genero';
+        $sql = 'SELECT * FROM generos';
         $listagenero = ConectarBD::leer(sql: $sql);
         $genero = [];
         foreach ($listagenero as $Genero) {
@@ -22,7 +22,7 @@ class GeneroDAO implements InterfaceDAO
     }
     public static function encontrarUno(string $id): ?Genero
     {
-        $sql = 'SELECT * FROM genero WHERE id =:id;';
+        $sql = 'SELECT * FROM generos WHERE id =:id;';
         $Genero = ConectarBD::leer(sql: $sql, params: [':id' => $id]);
         if (count($Genero) === 0) {
            return null;

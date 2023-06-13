@@ -2,7 +2,7 @@
 
 namespace Raiz\Bd;
 
-use Raiz\Aux\Serializador;
+use Raiz\Seri\Serializador;
 use Raiz\Bd\InterfaceDAO;
 use Raiz\Models\Editorial;
 
@@ -12,7 +12,7 @@ class EditorialDAO implements InterfaceDAO
 
     public static function listar(): array
     {
-        $sql = 'SELECT * FROM Editorial';
+        $sql = 'SELECT * FROM editoriales';
         $listaEditorial = ConectarBD::leer(sql: $sql);
         $Editorial = [];
         foreach ($listaEditorial as $Editorial) {
@@ -22,7 +22,7 @@ class EditorialDAO implements InterfaceDAO
     }
     public static function encontrarUno(string $id): ?Editorial
     {
-        $sql = 'SELECT * FROM Editorial WHERE id =:id;';
+        $sql = 'SELECT * FROM editoriales WHERE id =:id;';
         $Editorial = ConectarBD::leer(sql: $sql, params: [':id' => $id]);
         if (count($Editorial) === 0) {
            return null;

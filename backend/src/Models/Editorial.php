@@ -4,12 +4,12 @@ namespace Raiz\Models;
 
 class Editorial extends ModelBase{
     private string $nombre;
-    private int $activo;
-    public function __construct(string $nombre, int $activo, int $id)
+
+    public function __construct(string $nombre, int $id)
     {
         parent::__construct($id);
         $this->nombre = $nombre;
-        $this->activo = $activo;
+
     }
     public function GetNombre()
     {
@@ -31,14 +31,13 @@ class Editorial extends ModelBase{
     {
         return new Editorial(
             id: $datos['id'] === null ? 0 : intVal($datos['id']),
-            activo: $datos["activo"],
             nombre: $datos["nombre"]
         );
     }
     /** @Return mixed[] */
     public function serializar(): array
     {
-        $serializar = array("nombre_apellido" => $this->Getnombre(), "activo" => $this->GetEsactivo() );
+        $serializar = array("nombre_apellido" => $this->Getnombre() );
         return $serializar;
     }
 }

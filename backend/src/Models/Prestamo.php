@@ -39,7 +39,7 @@ class Prestamo extends ModelBase
     }
     public function GetFechaDesde()
     {
-        $this->fecha_desde;
+        return $this->fecha_desde;
     }
     public function SetFechaDesde($fecha_desde)
     {
@@ -82,7 +82,13 @@ class Prestamo extends ModelBase
     /** @Return mixed[] */
     public function serializar(): array
     {
-        $serializar = array("socio" => $this->GetSoscio(), "libro" =>  $this->GetLibro(), "fecha_desde" =>  $this->GetFechaDesde(), "fecha_hasta" => $this->GetFechaHasta(), "fecha_dev" =>  $this->GetFechaDev());
+        $serializar = array(
+            "socio" => $this->GetSoscio()->serializar(),
+            "libro" => $this->GetLibro()->serializar(),
+            "fecha_desde" =>  date_format($this->GetFechaDesde(), "Y-m-d"),
+            "fecha_hasta" => date_format($this->GetFechaHasta(), "Y-m-d"),
+            "fecha_dev" => $this->GetFechaDev() === null ? null : date_format($this->GetFechaDev(), "Y-m-d")
+        );
         return $serializar;
     }
 }
