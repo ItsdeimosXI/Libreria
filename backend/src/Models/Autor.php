@@ -23,14 +23,7 @@ class Autor extends ModelBase{
     {
         return $this->nombre_apellido;
     }
-    public function GetEsactivo()
-    {
-        return $this->activo;
-    }
-    public function SetEsactivo(int $activo)
-    {
-        $this->activo = $activo;
-    }
+ 
     public static function deserializar(array $datos): self
     {
         return new autor(

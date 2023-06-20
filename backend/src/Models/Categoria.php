@@ -24,12 +24,7 @@ class Categoria extends ModelBase
     {
         $this->descripcion = $descripcion;
     }
-    public function GetActivo(){
-        return $this->activo;
-    }
-    public function SetActivo(int $activo){
-        $this->activo = $activo;
-    }
+
     public static function deserializar(array $datos): self
     {
         return new categoria(

@@ -5,7 +5,7 @@ namespace Raiz\Controllers;
 use Raiz\Bd\LibroDAO;
 use Raiz\Models\Libro;
 use Raiz\Bd\AutorDAO;
-use Raiz\Bd\CategoriaDAO;
+use Raiz\Bd\CategoriasDAO;
 use Raiz\Bd\GeneroDAO;
 use Raiz\Bd\EditorialDAO;
 
@@ -53,7 +53,7 @@ class LibroController implements InterfaceController{
     public static function crear(array $parametros): array
     {
         $parametros['genero'] = GeneroDAO::encontrarUno($parametros['id_genero']);
-        $parametros['categoria'] = CategoriaDAO::encontrarUno($parametros['id_categoria']);
+        $parametros['categoria'] = CategoriasDAO::encontrarUno($parametros['id_categoria']);
         $parametros['editorial']= EditorialDAO::encontrarUno($parametros['id_editorial']);
         foreach($parametros['autor'] as $autor){
             $parametros[$autor][] = AutorDAO::encontrarUno($autor);

@@ -19,14 +19,7 @@ class Editorial extends ModelBase{
     {
         $this->nombre = $nombre;
     }
-    public function GetEsactivo()
-    {
-        return $this->activo;
-    }
-    public function SetEsactivo(int $activo)
-    {
-        $this->activo = $activo;
-    }
+
     public static function deserializar(array $datos): self
     {
         return new Editorial(
