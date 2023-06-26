@@ -1,8 +1,9 @@
+
 <script setup lang="ts">
+import Bienvenida from "./components/Bienvenida.vue";
+import NavbarComp from "./components/Navegacion.vue"
 </script>
 <template>
-  <title>Biblioteca</title>
-  <h1>Viendo como se usa esto</h1>
-  <p>HOLA</p>
+<NavbarComp></NavbarComp>
+<Bienvenida></Bienvenida>
 </template>
-
