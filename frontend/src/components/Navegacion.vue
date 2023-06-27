@@ -7,19 +7,17 @@
           </button>
           <div class="collapse navbar-collapse justify-content-center  mt-3 " id="navbarNav">
             <ul class="navbar-nav text-center">
-
-
               <li class="nav-item hvr-float">
                 <a class="nav-link mx-5" aria-current="page" href="#inicio">inicio</a>
               </li>
               <li class="nav-item hvr-float">
-                <a class="nav-link  mx-5" href="#calculadora">Socios</a>
+                <a class="nav-link  mx-5" href="#socios">Socios</a>
               </li>
               <li class="nav-item hvr-float">
-                <a class="nav-link  mx-5" href="#contacto">Prestamos</a>
+                <a class="nav-link  mx-5" href="#prestamos">Prestamos</a>
               </li>
               <li class="nav-item hvr-float">
-                <a class="nav-link  mx-5" target="_blank" href="">Acerca de</a>
+                <a class="nav-link  mx-5" target="_blank" href="#acercade">Acerca de</a>
               </li>
             </ul>
           </div>

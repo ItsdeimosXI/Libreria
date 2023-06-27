@@ -1,20 +1,7 @@
 <template>
     <main>
       <div class="bienvenida text-center">
-        <h1 style="color:var(--color-main1); font-family: 'Press Start 2P', cursive;" class="">App para biblioteca modelo</h1>
-       <h4 class="text-white"></h4>
-        <h4 class="mt-5 mb-3 text-light"></h4>
-        <h5 class="text-secondary"></h5>
-
-        <div class="text-light mt-5">
-          <i class="bi bi-steam"></i>
-          <i class="bi bi-playstation"></i>
-          <i class="bi bi-xbox"></i>
-          <i class="bi bi-nintendo-switch"></i>
-          <i class="bi bi-google-play"></i>
-          <i class="bi bi-three-dots"></i>
-        </div>
-
+        <h1 style="color: white; font-family: 'Press Start 2P', cursive;" class="">App para biblioteca modelo</h1>
         <div class="container_mouse mt-5">
           <span  class="mouse-btn">
             <span  class="mouse-scroll"></span>
