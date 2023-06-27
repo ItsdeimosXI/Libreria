@@ -4,8 +4,7 @@ use Slim\Factory\AppFactory;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Raiz\Controllers\LibroController;
-
-
+use Raiz\Seri\Utiles\Utileria;
 
 // ---- RUTAS PARA TRABAJAR CON EL CONTROLADOR ---- // 
 // --------------- CRUD SIMPLE -------------------- //
@@ -29,15 +28,16 @@ $app->get('/apiv1/libros/{id}', function (Request $req, Response $res, array $ar
 // ---- Crear nuevo regitro ---- //
 
 $app->post('/apiv1/libros/nuevo', function (Request $req, Response $res, array $args) {
-    var_dump($req->getQueryParams());
-    $payload = Json_Encode(LibroController::crear($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $request = Utileria::PasarAJson(file_get_contents(`php://input`));
+    $payload = Json_Encode(LibroController::crear($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
 
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/libros/actualizar/{id}', function (Request $req, Response $res, array $args) {
-    $payload = Json_Encode(LibroController::actualizar($req->getQueryParams()), JSON_PRETTY_PRINT);
+    $request = Utileria::PasarAJson(file_get_contents(`php://input`));
+    $payload = Json_Encode(LibroController::actualizar($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
