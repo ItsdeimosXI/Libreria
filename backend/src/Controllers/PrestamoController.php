@@ -56,4 +56,11 @@ class PrestamoController implements InterfaceController{
         PrestamoDAO::borrar($id);
         
     }
+    public static function verificarLibroDevuelvo(){
+
+    }
+
+    public static function calcularDiasRetraso( ){
+        
+    }
 }
