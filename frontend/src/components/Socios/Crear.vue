@@ -29,7 +29,7 @@ export default {
             }
           
             console.log(socio)     
-            await axios.post('http://192.168.20.10/apiv1/socios/nuevo', socio).
+            await axios.post('http://127.0.0.1:8000/apiv1/socios/nuevo', socio).
             then((response)=>{
                 console.log(response.data)
                 this.$router.push('/socios')

@@ -126,12 +126,12 @@ export default {
 
     },
     async listarSocios() {
-      const res = await axios.get("http://192.168.20.10/apiv1/socios");
+      const res = await axios.get("http://127.0.0.1:8000/apiv1/socios");
       this.items = res.data;
       console.log(res.data);
     },
     borrar(id) {
-      axios.delete('http://192.168.20.10/apiv1/socios/' + id)
+      axios.delete('http://127.0.0.1:8000/apiv1/socios/' + id)
         .then((response) => {
           console.log(response)
           if (response.data === null) { alert("socio eliminado") }

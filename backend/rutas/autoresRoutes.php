@@ -28,7 +28,7 @@ $app->get('/apiv1/autores/{id}', function (Request $req, Response $res, array $a
 // ---- Crear nuevo regitro ---- //
 
 $app->post('/apiv1/autores/nuevo', function (Request $req, Response $res, array $args) {
-    $request = Utileria::PasarAJson(file_get_contents(`php://input`));
+    $request = Utileria::PasarAJson(file_get_contents("php://input"));
     var_dump($req->getQueryParams());
     $payload = Json_Encode(AutorController::crear($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
@@ -37,7 +37,7 @@ $app->post('/apiv1/autores/nuevo', function (Request $req, Response $res, array 
 
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/autores/{id}', function (Request $req, Response $res, array $args) {
-    $request = Utileria::PasarAJson(file_get_contents(`php://input`));
+    $request = Utileria::PasarAJson(file_get_contents("php://input"));
     $payload = Json_Encode(AutorController::actualizar($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
