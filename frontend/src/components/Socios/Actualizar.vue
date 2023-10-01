@@ -22,7 +22,7 @@ export default {
        this.buscar()
     },
     methods: {
-        async ActualizarSocio(Socio ){
+        async ActualizarSocio(Socio){
             console.log(Socio);
                       const res = await axios.put('http://127.0.0.1:8000/apiv1/socios/'+this.$route.params.id, Socio)
                         
