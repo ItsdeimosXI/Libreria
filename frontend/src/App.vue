@@ -2,13 +2,13 @@
 import Footer from "../src/components/Footer.vue";
 import Boton from '../src/components/Boton.vue'
 
-
 export default {
   components: { Footer, Boton }
 
 }
 </script>
 <template>
+
   <body>
 
     <nav>
@@ -20,16 +20,16 @@ export default {
       <router-link to="/">Inicio</router-link>
       <router-link to="/about">acerca de</router-link>
       <router-link to="/socios">Socios</router-link>
+      <router-link to="/libros">Libros</router-link>
     </div>
     </nav>
- 
+
     <section> <router-view></router-view>
       
     </section>
     <Footer></Footer>
   </body>
 </template>
-
 
 <style scoped>
 * {

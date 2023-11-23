@@ -3,7 +3,6 @@
 
   <RouterLink class="crear" to="socios/crear"><img src="../../assets/editar.svg" alt="">Crear Socio</RouterLink>
 
-
   <select v-model=activo name="is_activo" id="activo">
     <option value='activo'>Activos</option>
     <option value='inactivo'>Inactivos</option>
@@ -80,7 +79,6 @@
             <td>{{ socio.direccion }}</td>
             <td>{{ socio.telefono }}</td>
       <tr class="acciones">
-
         <td >
           <router-link :to="{ name: 'ActualizarSocio', params: { id: socio.id } }">
             <Boton texto="editar" v-bind:class="{ primary: true }"></Boton>
@@ -99,8 +97,8 @@
 
     </tbody>
   </table>
-</template>
-
+  
+  </template>
 <script lang="ts">
 import axios from 'axios';
 import Boton from '../Boton.vue';
@@ -110,7 +108,6 @@ export default {
     return {
       items: [],
       activo: 'activo'
-
     };
   },
   computed: {
@@ -120,24 +117,22 @@ export default {
     this.listarSocios();
   },
   methods: {
-    
-    buscarSocio(Items){
+    buscarSocio(Items: { find: () => void; }){
       Items.find()
-
     },
     async listarSocios() {
       const res = await axios.get("http://127.0.0.1:8000/apiv1/socios");
       this.items = res.data;
       console.log(res.data);
     },
-    borrar(id) {
+    borrar(id: number) {
       axios.delete('http://127.0.0.1:8000/apiv1/socios/' + id)
         .then((response) => {
           console.log(response)
           if (response.data === null) { alert("socio eliminado") }
           this.listarSocios();
         })
-        .catch((error) => { alert('el socio no puede eliminarse porque tiene registro de prestamos') });
+        .catch((_error) => { alert('el socio no puede eliminarse porque tiene registro de prestamos') });
 
     }
   }
@@ -185,7 +180,6 @@ select{
   font-size:1em
 }
 tr .acciones{
-  text-aling:center;
-  background:#ccc;
+  text-align: center;
 }
 </style>

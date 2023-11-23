@@ -53,7 +53,7 @@ final class ConectarBD
     ) {
         $conexion = self::conectar();
         $consulta = $conexion->prepare(query: $sql);
-        //var_dump($params);
+        var_dump($params);
         $consulta->execute(params: $params);
         $consulta->closeCursor();
     }

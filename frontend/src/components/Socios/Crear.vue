@@ -11,7 +11,7 @@ export default {
                 direccion: "",
                 telefono: "",
                 fecha_alta: new Date().toISOString().substring(0, 10),
-                activo: 1,
+                estado: "",
             }
 
         }
@@ -24,19 +24,16 @@ export default {
                 nombre_apellido: this.Socio.nombre_apellido,
                 direccion: this.Socio.direccion,
                 telefono: this.Socio.telefono,
-                activo: this.Socio.activo,
+                estado: this.Socio.estado,
                 fecha_alta: this.Socio.fecha_alta
-            }
-          
+            }          
             console.log(socio)     
             await axios.post('http://127.0.0.1:8000/apiv1/socios/nuevo', socio).
-            then((response)=>{
-                console.log(response.data)
+                then(() => {
                 this.$router.push('/socios')
             })
             .catch()
     }
-
 }
 }
 
@@ -48,6 +45,10 @@ export default {
     <input v-model=Socio.nombre_apellido type="text" label='nombre y apellido' placeholder="apellido y nombre">
     <input v-model=Socio.telefono type="text" label='Telefono' placeholder="telefono">
     <input v-model=Socio.direccion type="text" label='direccion' placeholder="Direccion">
+    <select v-model=Socio.estado name="select_activo" id="select_activo">
+    <option value='1'>Activos</option>
+    <option value='0'>Inactivos</option>
+  </select>
 
     <button @click="crearSocio()">guardar</button>
     <router-link :to='{name:"Socios"}'><button>Volver</button></router-link>

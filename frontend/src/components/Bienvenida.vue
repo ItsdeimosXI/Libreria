@@ -4,7 +4,7 @@
         <h1 style="color: white; font-family: 'Press Start 2P', cursive;" class="">App para biblioteca modelo</h1>
         <div class="container_mouse mt-5">
           <span  class="mouse-btn">
-            <span  class="mouse-scroll"></span>
+            <span class="mouse-scroll"></span>
           </span>
         </div>
       </div>
