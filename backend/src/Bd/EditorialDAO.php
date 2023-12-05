@@ -14,11 +14,11 @@ class EditorialDAO implements InterfaceDAO
     {
         $sql = 'SELECT * FROM editoriales';
         $listaEditorial = ConectarBD::leer(sql: $sql);
-        $Editorial = [];
+        $Editoriales = [];
         foreach ($listaEditorial as $Editorial) {
-            $Editorial[] = Editorial::deserializar($Editorial);
+            $Editoriales[] = Editorial::deserializar($Editorial);
         }
-        return $Editorial;
+        return $Editoriales;
     }
     public static function encontrarUno(string $id): ?Editorial
     {

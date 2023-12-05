@@ -14,11 +14,11 @@ class AutorDAO implements InterfaceDAO
     {
         $sql = 'SELECT * FROM autores';
         $listaAutor = ConectarBD::leer(sql: $sql);
-        $Autor = [];
+        $Autores = [];
         foreach ($listaAutor as $Autor) {
-            $Autor[] = Autor::deserializar($Autor);
+            $Autores[] = Autor::deserializar($Autor);
         }
-        return $Autor;
+        return $Autores;
     }
     public static function encontrarUno(string $id): ?Autor
     {

@@ -16,12 +16,12 @@ class AutorController implements InterfaceController{
 
     public static function listar(): array
     {
-        $Autor = [];
+        $Autores = [];
         $listadoAutor = AutorDAO::listar();
         foreach($listadoAutor as $Autor){
-            $Autor[] = $Autor->serializar();
+            $Autores[] = $Autor->serializar();
         }
-        return $Autor;
+        return $Autores;
 
         
     }

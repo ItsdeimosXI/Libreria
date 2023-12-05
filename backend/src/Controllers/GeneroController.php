@@ -13,17 +13,14 @@ class GeneroController implements InterfaceController{
     //  crear
     //  actualizar
     //  borrar  
-
     public static function listar(): array
     {
-        $Genero = [];
+        $listadoGeneros = []; // Cambiado el nombre de la variable para evitar conflictos
         $listadoGenero = GeneroDAO::listar();
-        foreach($listadoGenero as $Genero){
-            $Genero[] = $Genero->serializar();
+        foreach($listadoGenero as $genero){ // Cambiado el nombre de la variable
+            $listadoGeneros[] = $genero->serializar(); // Utilizando la nueva variable
         }
-        return $Genero;
-
-        
+        return $listadoGeneros; // Devolviendo la nueva variable
     }
     
     public static function encontrarUno(string $id): ?array

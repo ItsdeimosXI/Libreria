@@ -10,5 +10,4 @@ const app = createApp(App)
 app.use(VueAxios, axios)
 app.use(Router)
 
-
 app.mount('#app')

@@ -16,12 +16,12 @@ class EditorialController implements InterfaceController{
 
     public static function listar(): array
     {
-        $Editorial = [];
+        $editoriales = [];
         $listadoEditorial = EditorialDAO::listar();
         foreach($listadoEditorial as $Editorial){
-            $Editorial[] = $Editorial->serializar();
+            $editoriales[] = $Editorial->serializar() ;
         }
-        return $Editorial;
+        return $editoriales;
 
         
     }
