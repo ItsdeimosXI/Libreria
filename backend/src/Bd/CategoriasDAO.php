@@ -15,8 +15,8 @@ class categoriasDAO implements InterfaceDAO
         $sql = 'SELECT * FROM categorias';
         $listacategorias = ConectarBD::leer(sql: $sql);
         $categorias = [];
-        foreach ($listacategorias as $categorias) {
-            $categorias[] = categoria::deserializar($categorias);
+        foreach ($listacategorias as $categoria) {
+            $categorias[] = categoria::deserializar($categoria);
         }
         return $categorias;
     }

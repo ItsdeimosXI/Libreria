@@ -6,8 +6,9 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
+import 'bootstrap/dist/js/bootstrap'
 const app = createApp(App)
 app.use(VueAxios, axios)
 app.use(Router)
-
 app.mount('#app')

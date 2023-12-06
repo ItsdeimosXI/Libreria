@@ -1,3 +1,4 @@
 <template>
-    <h1>componente about</h1>
+    <h1>Trabajo final</h1>
+    <p>Hecho por manuel salamanca, tecnicatura de desarrolo web segundo año</p>
 </template>

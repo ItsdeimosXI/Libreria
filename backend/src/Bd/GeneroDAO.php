@@ -35,12 +35,11 @@ class GeneroDAO implements InterfaceDAO
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO genero (descripcion, activo) VALUES (:descripcion, :activo)';
+        $sql = 'INSERT INTO generos (descripcion) VALUES (:descripcion)';
         ConectarBD::escribir(
             sql: $sql,
             params: [
                 ':descripcion' => $params['descripcion'],
-                ':activo' => $params['activo']
             ]
         );
     }
@@ -48,7 +47,7 @@ class GeneroDAO implements InterfaceDAO
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE genero SET nombre =:nombre WHERE id=:id';
+        $sql = 'UPDATE generos SET nombre =:nombre WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [
@@ -59,7 +58,7 @@ class GeneroDAO implements InterfaceDAO
     }
     public static function borrar(string $id)
     {
-        $sql = 'DELETE FROM genero WHERE id=:id';
+        $sql = 'DELETE FROM generos WHERE id=:id';
         ConectarBD::escribir(sql: $sql, params: [':id' => $id]);
     }
 }

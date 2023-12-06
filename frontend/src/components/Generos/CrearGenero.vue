@@ -1,19 +1,54 @@
 <template>
-    <div>
-
+    <div class="row mt-3">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header bg-dark text-white text-center">
+                    Crear Nuevo genero
+                </div>
+        <div class="card-body">
+            <form v-on:submit="guardar">
+                <div class="input-goup mb-3">
+                    <span class="input-group-text">
+                        <i class="fa-solid fa-commenting">
+                        </i>
+                    </span>
+                    <input type="text" id="descripcion" class="form-control" maxlength="20" placeholder="Genero libro" required v-model="descripcion">
+                </div>
+                <div class="d-grid col-6 mx-auto">
+                    <button class="btn btn-success">
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+            </div>
+        </div>
     </div>
 </template>
 
-<script setup lang="ts">
-import axios from 'axios';
-import { onMounted } from 'vue';
-let Genero = [
-    'descripcion'
-]
+<script lang="ts">
 
-onMounted( () => {
-    axios.get()
-})
+import { show_alerta, enviarSolicitud } from '../../funciones.js';
+export default {
+    data(){
+        return {
+        descripcion: '',
+         url: 'http://127.0.0.1:8000/apiv1/generos/nuevo'
+        }    
+    },
+    methods:{
+        guardar(){
+            event?.preventDefault();
+            if(this.descripcion.trim() === ''){
+                show_alerta('Escribe la descripcion', 'warning', 'descripcion' );
+            }else{
+                var parametros = {descripcion: this.descripcion.trim()}
+                enviarSolicitud('POST', parametros, this.url , 'Genero guardado');
+            }
+        }
+    }
+}
 </script>
 
 <style scoped>

@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../components/Home.vue';
 import SociosListar from '../components/Socios/Listar.vue';
+import ListarGeneros from '../components/Generos/ListarGeneros.vue';
 import SociosCrear from '../components/Socios/Crear.vue';
+import CrearGeneros from '../components/Generos/CrearGenero.vue';
 import SocioActualizar from '../components/Socios/Actualizar.vue';
+import ActualizarGenero from '../components/Generos/ActualizarGenero.vue';
 import LibrosListar from '../components/Libros/Listar.vue';
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -24,6 +26,21 @@ const router = createRouter({
       component: SociosListar
     },
     {
+      path: '/generos',
+      name: 'Generos',
+      component: ListarGeneros
+    },
+    {
+      path: '/generos/crear',
+      name: 'CrearGeneros',
+      component: CrearGeneros
+    },
+    {
+      path: '/generos/actualizar/:id',
+      name: 'ActualizarGenero',
+      component: ActualizarGenero
+    },
+    {
       path: '/socios/crear',
       name: 'sociosCrear',
       component: SociosCrear
@@ -34,7 +51,7 @@ const router = createRouter({
     ,
     { path: '/libros/', 
     name: 'Libros', 
-    component: LibrosListar }
+    component: LibrosListar },
   ]
 })
 

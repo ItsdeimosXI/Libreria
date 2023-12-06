@@ -1,79 +1,32 @@
-<script lang="ts">
-import Footer from "../src/components/Footer.vue";
-import Boton from '../src/components/Boton.vue'
-
-export default {
-  components: { Footer, Boton }
-
-}
-</script>
 <template>
-
-  <body>
-
-    <nav>
-      <div class="logo">
-        <img src="../src/assets/logo_libro.svg" alt="logo">
-        <h2>App Prestamos de Libros</h2>
-      </div>
-    <div>
-      <router-link to="/">Inicio</router-link>
-      <router-link to="/about">acerca de</router-link>
-      <router-link to="/socios">Socios</router-link>
-      <router-link to="/libros">Libros</router-link>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
+      <div class="container-fluid">
+        <router-link :to="{name: 'home'}" class="navbar-brand">Inicio</router-link>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <router-link :to="{name: 'Socios' }" class="nav-link">Socios</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{name: 'Libros'}" class="nav-link" router-limk>Libros</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{name: 'Generos'}" class="nav-link">Generos</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{name: 'about'}" class="nav-link">Sobre nosotros</router-link>
+            </li>
+          </ul>
+        </div>
     </div>
-    </nav>
-
-    <section> <router-view></router-view>
-      
-    </section>
-    <Footer></Footer>
-  </body>
+  </nav>
+  <div class="container-fluid mt-3">
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped>
-* {
-  padding: 0px;
-  margin: 0px;
-  box-sizing: content-box;
 
-}
-.logo{
-  padding: 10px;
-  display: flex;
-  align-items: center;
-}
-.logo img{
-  padding: 25px;
-  width: 50px;
-  height: 50px;
-}
-
-body {}
-
-nav {
-  top: 0;
-  display: flex;
-  align-items: center;
-  align-content: space-between;
-  justify-content: space-between;
-  height: 10%;
-  background: #079d46;
-  color: aliceblue;
-}
-
-nav a {
-  padding: 20px;
-  text-transform: uppercase;
-  color: antiquewhite;
-}
-nav a:hover {
-  padding: 20px;
-  text-transform: uppercase;
-  color: rgb(158, 211, 0);
-}
-section{
-  height: 85%;
-  padding: 25px;
-}
-</style>

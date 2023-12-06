@@ -1,7 +1,7 @@
 <script lang="ts">
 import axios from "axios";
 export default {
-    data() {
+    data() { 
         return {
             libros: [],
         };
@@ -10,9 +10,6 @@ export default {
         this.getLibros();
     },
     methods: {
-        BuscarLibro(libros: { find: () => void; }) {
-            libros.find()
-        },
         async getLibros() {
             const res = await axios.get("http://127.0.0.1:8000/apiv1/libros")
             this.libros = res.data;
@@ -28,6 +25,7 @@ export default {
         .catch((_error) => { alert ('No se pudo eliminar el libro ya que esta prestado')} )
     }
     },
+   
 }
 </script>
 
@@ -39,7 +37,6 @@ export default {
                 <button texto="Nuevo" class="btn btn-primary">Crear nuevo libro</button>
             </div>
         </router-link>
-        <input type="text" placeholder="Buscar libro" v-model="BuscarLibro">
     </div>
     <div>
         <table class="table">
