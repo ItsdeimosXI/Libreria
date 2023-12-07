@@ -12,36 +12,35 @@ export function show_alerta(mensaje,icono,foco=''){
         buttonsStyling: false
     });
 }
-
-export function confirmar(id,descripcion){
-    var url = 'http://127.0.0.1:8000/apiv1/generos/' + id;
+export function confirmar(id,descripcion, url, mensaje, href){
+    var url = url + '/' + id;
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {confirmButton:'btn btn-success', cancelButton: 'btn btn-danger'},
         buttonsStyling: false
     });
     swalWithBootstrapButtons.fire({
-        title: 'Seguro que quiere eliminar el genero '+ descripcion,
-        text: 'Se perdera el genero',
+        title: 'Seguro que quiere eliminar '+ descripcion,
+        text: 'Se perdera para siempre',
         icon: 'question',
         showCancelButton:true,
         confirmButtonText:'<i class="fa-solid fa-check"></i> Si, eliminar',
         cancelButtonText:'<i class="fa-solid fa-ban"></i>Cancelar',
     }).then((result) => {
         if (result.isConfirmed){
-            enviarSolicitud('DELETE',(id) ,url, 'Genero eliminado');
+            enviarSolicitud('DELETE',(id) ,url, mensaje, href);
         }else{
             show_alerta('Operacion completada', 'info');
         }
     })
 }
 
-export function enviarSolicitud(metodo, parametros, url, mensaje){
+export function enviarSolicitud(metodo, parametros, url, mensaje, href){
     axios({method:metodo, url:url, data:parametros}).then(function(respuesta){
         var status = respuesta.data[0]['status'];
-        if(status ='success'){
+        if(status = 'success'){
             show_alerta(mensaje, status);
             window.setTimeout(function(){
-                window.location.href='/';
+                window.location.href= href;
             },1000);
         }
         else {

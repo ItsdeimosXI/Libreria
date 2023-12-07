@@ -3,7 +3,7 @@
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-header bg-dark text-white text-center">
-                    Crear nuevo Libro
+                    Crear Nueva Editorial
                 </div>
         <div class="card-body">
             <form v-on:submit="guardar">

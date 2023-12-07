@@ -1,76 +1,95 @@
+<template>
+    <div>
+        <section class="intro">
+        <div class="gradient-custom-1 h-100">
+            <div class="mask d-flex align-items-center h-100">
+            <div class="container">
+                <div class="input-goup mb-3">
+                    <router-link :to="{name: 'CrearEditoriales'}">
+                        <button class="btn btn-success">
+                       <i class="fa-solid fa-check"> </i>Crear nueva Libro
+                    </button>
+                    </router-link>
+                </div>
+                 <div class="row justify-content-center">
+                    <div class="col-12">
+                <div class="table-responsive bg-white">
+        <table class="table mb-0">
+         <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">TITULO</th>
+                <th scope="col">AUTOR</th>
+                <th scope="col">EDITORIAL</th>
+                <th scope="col">AÑO</th>
+                <th scope="col">CANTIDAD DE PAGINAS</th>
+                <th scope="col">GENERO</th>
+                <th scope="col">CATEGORIA</th>
+                <th scope="col">ESTADO</th>
+                <th scope="col">ACCIONES</th>
+                </tr>
+        </thead>
+            <tbody>
+                    <tr v-for="libro in libros" :key="libro.id">
+                        <th scope="row" style="color: #666666;">{{ libro.id }}</th>
+                        <td>{{ libro.titulo }}</td>
+                        <td>{{ libro.autor['nombre_apellido'] }}</td>
+                        <td>{{ libro.editorial['nombre']}}</td>
+                        <td>{{ libro.anio }}</td>
+                        <td>{{ libro.cant_paginas }}</td>
+                        <td>{{ libro.genero['descripcion'] }}</td>
+                        <td>{{ libro.categoria['descripcion'] }}</td>
+                        <td>{{ libro.estado }}</td>
+                    &nbsp;
+                    <td>
+                        <router-link :to="{path: '/libros/actualizar/'+libro.id}" class="btn btn-warning">
+                        <i class="fa-solid fa-edit"></i> 
+                        </router-link>
+                    <button class="btn btn-danger" @click="eliminar(libro.id, libro.nombre)"> 
+                    <i class="fa-solid fa-trash"></i>  
+                    </button>
+                  </td>
+                </tr>
+                   
+                
+            </tbody>
+        </table>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+            </div>
+    </div>
+    </section>
+</div>
+</template>
+
 <script lang="ts">
-import axios from "axios";
-export default {
-    data() { 
-        return {
-            libros: [],
-        };
+import axios from 'axios';
+import { confirmar } from '../Funciones/Funciones.js';
+export default{
+    data() {
+        return{
+            libros:null
+        }
     },
-    created() {
+    mounted(){
         this.getLibros();
     },
-    methods: {
-        async getLibros() {
-            const res = await axios.get("http://127.0.0.1:8000/apiv1/libros")
-            this.libros = res.data;
+    methods:{
+        getLibros(){
+            axios.get('http://127.0.0.1:8000/apiv1/libros').then(
+                response => (
+                    this.libros = response.data
+                )
+            );
+
         },
-    borrar(id:number){
-        axios.delete('http://127.0.0.1:8000/apiv1/libros/' + id).then((response) => {
-            if (response.data === null){
-                console.log(response)
-                alert ("Libro Eliminado")
-            }
-            this.getLibros();
-        })
-        .catch((_error) => { alert ('No se pudo eliminar el libro ya que esta prestado')} )
+        eliminar(id: any, descripcion: any, url='http://127.0.0.1:8000/apiv1/libros',  mensaje = 'Editorial eliminada', href ='/Libros'){
+            confirmar(id, descripcion, url, mensaje, href)
+        }
     }
-    },
-   
 }
 </script>
 
-<template>
-    <div>
-        <h1>Libros</h1>
-        <router-link to="/crear">
-            <div class="crear">
-                <button texto="Nuevo" class="btn btn-primary">Crear nuevo libro</button>
-            </div>
-        </router-link>
-    </div>
-    <div>
-        <table class="table">
-            <thead>
-                <th>ID</th>
-                <th>TITULO</th>
-                <th>AUTOR</th>
-                <th>EDITORIAL</th>
-                <th>AÑO</th>
-                <th>CANTIDAD DE PAGINAS</th>
-                <th>GENERO</th>
-                <th>CATEGORIA</th>
-                <th>ESTADO</th>
-                <th>ACCIONES</th>
-            </thead>
-            <tbody v-for="libro in libros" :key="libro.id">
-                <td>{{ libro.id }}</td>
-                <td>{{ libro.titulo }}</td>
-                <td v-for="(item, index) in libro.autor" :key="index">
-                    {{ item }}
-                </td>
-                <td v-for="(item, index) in libro.editorial" :key="index">
-                    {{ item }}</td>
-                <td>{{ libro.anio }}</td>
-                <td>{{ libro.cant_paginas }}</td>
-                <td v-for="(item, index) in libro.genero">{{ item }}</td>
-                <td v-for="(item, index) in libro.categoria">{{ item }}</td>
-                <td>{{ libro.estado }}</td>
-                <td>
-                    <button class="btn btn-primary">Editar </button>
-                    <button class="btn btn-danger" @click="borrar(libros.id)"> Eliminar </button>
-                </td>
-            </tbody>
-        </table>
-    </div>
-</template>
                     

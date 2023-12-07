@@ -29,7 +29,7 @@
 
 <script lang="ts">
 
-import { show_alerta, enviarSolicitud } from '../../funciones.js';
+import { show_alerta, enviarSolicitud } from '../Funciones/Funciones.js';
 export default {
     data(){
         return {
@@ -44,7 +44,7 @@ export default {
                 show_alerta('Escribe la descripcion', 'warning', 'descripcion' );
             }else{
                 var parametros = {descripcion: this.descripcion.trim()}
-                enviarSolicitud('POST', parametros, this.url , 'Genero guardado');
+                enviarSolicitud('POST', parametros, this.url , 'Genero guardado', '/Generos');
             }
         }
     }

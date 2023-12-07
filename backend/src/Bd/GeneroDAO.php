@@ -47,12 +47,12 @@ class GeneroDAO implements InterfaceDAO
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE generos SET nombre =:nombre WHERE id=:id';
+        $sql = 'UPDATE generos SET descripcion =:descripcion WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [
                 ':id' => $params['id'],
-                ':nombre' => $params['nombre'],
+                ':descripcion' => $params['descripcion'],
             ]
         );
     }

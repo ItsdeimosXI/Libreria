@@ -24,16 +24,13 @@ $app->get('/apiv1/generos/{id}', function (Request $req, Response $res, array $a
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
-
 // ---- Crear nuevo regitro ---- //
-
 $app->post('/apiv1/generos/nuevo', function (Request $req, Response $res, array $args) {
     $request = Utileria::PasarAJson(file_get_contents("php://input"));
     $payload = Json_Encode(GeneroController::crear($request), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);
     return $res->withHeader("Content-Type", "application/json");
 });
-
 // ---- Modificar registro existente ---- //
 $app->put('/apiv1/generos/{id}', function (Request $req, Response $res, array $args) {
     $request = Utileria::PasarAJson(file_get_contents("php://input"));
@@ -43,7 +40,6 @@ $app->put('/apiv1/generos/{id}', function (Request $req, Response $res, array $a
 });
 
 // ---- Borrar registro existente ---- //
-
 $app->delete('/apiv1/generos/{id}', function (Request $req, Response $res, array $args) {
     $payload = Json_Encode(GeneroController::borrar($args["id"]), JSON_PRETTY_PRINT);
     $res->getBody()->write($payload);

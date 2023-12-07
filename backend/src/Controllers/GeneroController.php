@@ -30,10 +30,7 @@ class GeneroController implements InterfaceController{
             return $Genero;
         }else{
             return $Genero->serializar();
-        }
-        
-        
-        
+        } 
     }
 
     public static function crear(array $parametros): array

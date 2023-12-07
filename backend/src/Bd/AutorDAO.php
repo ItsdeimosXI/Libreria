@@ -35,13 +35,11 @@ class AutorDAO implements InterfaceDAO
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO Autor (id, nombre_apellido, activo) VALUES (:id, :nombre_apellido, :activo)';
+        $sql = 'INSERT INTO autores (nombre_apellido) VALUES (:nombre_apellido)';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':id' => $params['id'],
                 ':nombre_apellido' => $params['nombre_apellido'],
-                ':activo' => $params['activo']
             ]
         );
     }
@@ -49,7 +47,7 @@ class AutorDAO implements InterfaceDAO
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE Autor SET nombre_apellido =:nombre_apellido WHERE id=:id';
+        $sql = 'UPDATE autores SET nombre_apellido =:nombre_apellido WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [
@@ -60,7 +58,7 @@ class AutorDAO implements InterfaceDAO
     }
     public static function borrar(string $id)
     {
-        $sql = 'DELETE FROM Autor WHERE id=:id';
+        $sql = 'DELETE FROM autores WHERE id=:id';
         ConectarBD::escribir(sql: $sql, params: [':id' => $id]);
     }
 }

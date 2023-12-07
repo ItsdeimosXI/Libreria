@@ -18,6 +18,15 @@
               <router-link :to="{name: 'Generos'}" class="nav-link">Generos</router-link>
             </li>
             <li class="nav-item">
+              <router-link :to="{name: 'Editoriales'}" class="nav-link">Editoriales</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{name: 'Autores'}" class="nav-link">Autores</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{name: 'Categorias'}" class="nav-link">Categorias</router-link>
+            </li>
+            <li class="nav-item">
               <router-link :to="{name: 'about'}" class="nav-link">Sobre nosotros</router-link>
             </li>
           </ul>

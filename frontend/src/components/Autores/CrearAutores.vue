@@ -3,7 +3,7 @@
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-header bg-dark text-white text-center">
-                    Crear nuevo Libro
+                    Crear Nuevo Autor
                 </div>
         <div class="card-body">
             <form v-on:submit="guardar">
@@ -12,7 +12,7 @@
                         <i class="fa-solid fa-commenting">
                         </i>
                     </span>
-                    <input type="text" id="nombre" class="form-control" maxlength="20" placeholder="Categoria" required v-model="nombre">
+                    <input type="text" id="nombre_apellido" class="form-control" maxlength="20" placeholder="Autor del libro" required v-model="nombre_apellido">
                 </div>
                 <div class="d-grid col-6 mx-auto">
                     <button class="btn btn-success">
@@ -33,18 +33,18 @@ import { show_alerta, enviarSolicitud } from '../Funciones/Funciones.js';
 export default {
     data(){
         return {
-        nombre: '',
-         url: 'http://127.0.0.1:8000/apiv1/editoriales/nuevo'
+        nombre_apellido: '',
+         url: 'http://127.0.0.1:8000/apiv1/autores/nuevo'
         }    
     },
     methods:{
         guardar(){
             event?.preventDefault();
-            if(this.nombre.trim() === ''){
-                show_alerta('Escribe la editorial', 'warning', 'nombre' );
+            if(this.nombre_apellido.trim() === ''){
+                show_alerta('Escribe el autor', 'warning', 'nombre_apellido' );
             }else{
-                var parametros = {nombre: this.nombre.trim()}
-                enviarSolicitud('POST', parametros, this.url , 'Editorial guardada', '/Editoriales');
+                var parametros = {nombre_apellido: this.nombre_apellido.trim()}
+                enviarSolicitud('POST', parametros, this.url , 'autor guardado', '/Autores');
             }
         }
     }

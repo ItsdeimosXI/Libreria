@@ -5,9 +5,9 @@
             <div class="mask d-flex align-items-center h-100">
             <div class="container">
                 <div class="input-goup mb-3">
-                    <router-link :to="{name: 'CrearGeneros'}">
+                    <router-link :to="{name: 'CrearCategorias'}">
                         <button class="btn btn-success">
-                       <i class="fa-solid fa-check"> </i>Crear nuevo genero
+                       <i class="fa-solid fa-check"> </i>Crear nueva categoria
                     </button>
                     </router-link>
                 </div>
@@ -18,20 +18,17 @@
          <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">descripcion</th>
                     <th scope="col">Acciones</th>
                 </tr>
         </thead>
             <tbody>
-                <tr v-for="genero in generos" :key="genero.id">
-                    <th scope="row" style="color: #666666;">{{genero.id}}</th>
-                    <td>{{genero.descripcion}}
+                <tr v-for="categoria in Categorias" :key="categoria.id">
+                    <th scope="row" style="color: #666666;">{{categoria.id}}</th>
+                    <td>{{categoria.descripcion}}
                     </td>
-                    <td>
-                    <router-link :to="{path: '/generos/actualizar/'+genero.id}" class="btn btn-warning">
-                    <i class="fa-solid fa-edit"></i> 
-                    </router-link> &nbsp;
-                    <button class="btn btn-danger" @click="eliminar(genero.id, genero.descripcion)"> 
+                    <td>&nbsp;
+                    <button class="btn btn-danger" @click="eliminar(categoria.id, categoria.descripcion)"> 
                     <i class="fa-solid fa-trash"></i> 
                     </button>
                     </td>
@@ -52,25 +49,24 @@
 import axios from 'axios';
 import { confirmar } from '../Funciones/Funciones.js';
 export default{
-    
     data() {
         return{
-            generos:null,
+            Categorias:null
         }
     },
     mounted(){
-        this.getGeneros();
+        this.getCategorias();
     },
     methods:{
-        getGeneros(){
-            axios.get('http://127.0.0.1:8000/apiv1/generos').then(
+        getCategorias(){
+            axios.get('http://127.0.0.1:8000/apiv1/categorias').then(
                 response => (
-                    this.generos = response.data
+                    this.Categorias = response.data
                 )
             );
 
         },
-        eliminar(id: any, descripcion: any, url='http://127.0.0.1:8000/apiv1/generos', mensaje = 'Autor eliminado', href ='/generos'){
+        eliminar(id: any, descripcion: any, url='http://127.0.0.1:8000/apiv1/categorias',  mensaje = 'Categoria eliminada', href ='/Categorias'){
             confirmar(id, descripcion, url, mensaje, href)
         }
     }

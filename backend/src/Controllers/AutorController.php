@@ -33,10 +33,7 @@ class AutorController implements InterfaceController{
             return $Autor;
         }else{
             return $Autor->serializar();
-        }
-        
-        
-        
+        }      
     }
 
     public static function crear(array $parametros): array

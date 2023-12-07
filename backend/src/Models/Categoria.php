@@ -27,15 +27,18 @@ class Categoria extends ModelBase
 
     public static function deserializar(array $datos): self
     {
-        return new categoria(
-            id: $datos['id'] === null ? 0 : intVal($datos['id']),
-            descripcion: $datos["descripcion"]
+        $id = isset($datos['id']) ? intval($datos['id']) : 0;
+        $descripcion = isset($datos['descripcion']) ? $datos['descripcion'] : '';
+    
+        return new Categoria(
+            descripcion: $descripcion,
+            id: $id
         );
     }
     /** @Return mixed[] */
     public function serializar(): array
     {
-        $serializar = array("descripcion" => $this->GetDescripcion() );
+        $serializar = array("descripcion" => $this->GetDescripcion(), "id" => $this->getId());
         return $serializar;
     }
 }

@@ -27,9 +27,7 @@ export default {
             console.log(this.$route.params.id);
             await axios.put('http://127.0.0.1:8000/apiv1/socios/' + Socio.id, Socio)
                 .then(() => { this.$router.push("/socios") })
-                .catch((e) => { alert(e) })
-                        
-            
+                .catch((e) => { alert(e) })     
         },
         async buscar(){
             const res = await axios.get('http://127.0.0.1:8000/apiv1/socios/'+this.$route.params.id);

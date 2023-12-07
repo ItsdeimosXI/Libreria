@@ -3,7 +3,7 @@
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-header bg-dark text-white text-center">
-                    Crear nuevo Libro
+                    Crear Nueva Editorial
                 </div>
         <div class="card-body">
             <form v-on:submit="guardar">
@@ -12,7 +12,7 @@
                         <i class="fa-solid fa-commenting">
                         </i>
                     </span>
-                    <input type="text" id="nombre" class="form-control" maxlength="20" placeholder="Categoria" required v-model="nombre">
+                    <input type="text" id="descripcion" class="form-control" maxlength="20" placeholder="Editorial" required v-model="descripcion">
                 </div>
                 <div class="d-grid col-6 mx-auto">
                     <button class="btn btn-success">
@@ -33,17 +33,17 @@ import { show_alerta, enviarSolicitud } from '../Funciones/Funciones.js';
 export default {
     data(){
         return {
-        nombre: '',
+        descripcion: '',
          url: 'http://127.0.0.1:8000/apiv1/editoriales/nuevo'
         }    
     },
     methods:{
         guardar(){
             event?.preventDefault();
-            if(this.nombre.trim() === ''){
-                show_alerta('Escribe la editorial', 'warning', 'nombre' );
+            if(this.descripcion.trim() === ''){
+                show_alerta('Escribe la Editorial', 'warning', 'descripcion' );
             }else{
-                var parametros = {nombre: this.nombre.trim()}
+                var parametros = {descripcion: this.descripcion.trim()}
                 enviarSolicitud('POST', parametros, this.url , 'Editorial guardada', '/Editoriales');
             }
         }

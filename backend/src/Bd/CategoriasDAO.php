@@ -35,13 +35,11 @@ class categoriasDAO implements InterfaceDAO
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO categorias (id, descripcion, activo) VALUES (:id, :descripcion, :activo)';
+        $sql = 'INSERT INTO categorias ( descripcion) VALUES ( :descripcion)';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':id' => $params['id'],
                 ':descripcion' => $params['descripcion'],
-                ':activo' => $params['activo']
             ]
         );
     }

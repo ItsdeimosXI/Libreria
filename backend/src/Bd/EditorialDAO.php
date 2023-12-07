@@ -35,13 +35,11 @@ class EditorialDAO implements InterfaceDAO
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO Editorial (id, nombre, activo) VALUES (:id, :nombre, :activo)';
+        $sql = 'INSERT INTO editoriales (nombre) VALUES (:nombre)';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':id' => $params['id'],
                 ':nombre' => $params['nombre'],
-                ':activo' => $params['activo']
             ]
         );
     }
@@ -49,7 +47,7 @@ class EditorialDAO implements InterfaceDAO
     public static function actualizar(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'UPDATE Editorial SET nombre =:nombre WHERE id=:id';
+        $sql = 'UPDATE editoriales SET nombre =:nombre WHERE id=:id';
         ConectarBD::escribir(
             sql: $sql,
             params: [
@@ -60,7 +58,7 @@ class EditorialDAO implements InterfaceDAO
     }
     public static function borrar(string $id)
     {
-        $sql = 'DELETE FROM Editorial WHERE id=:id';
+        $sql = 'DELETE FROM editoriales WHERE id=:id';
         ConectarBD::escribir(sql: $sql, params: [':id' => $id]);
     }
 }
