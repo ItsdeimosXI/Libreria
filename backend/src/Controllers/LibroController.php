@@ -51,29 +51,34 @@ class LibroController implements InterfaceController{
     }
 
     public static function crear(array $parametros): array
-    {
+    {   
         $parametros['genero'] = GeneroDAO::encontrarUno($parametros['id_genero']);
         $parametros['categoria'] = CategoriasDAO::encontrarUno($parametros['id_categoria']);
-        $parametros['editorial']= EditorialDAO::encontrarUno($parametros['id_editorial']);
-        foreach($parametros['autor'] as $autor){
-            $parametros[$autor][] = AutorDAO::encontrarUno($autor);
+        $parametros['editorial'] = EditorialDAO::encontrarUno($parametros['id_editorial']);
+        // Cargar detalles completos de los autores
+        $autores = [];
+        foreach ($parametros['id_autor'] as $idAutor) {
+            $autor = AutorDAO::encontrarUno($idAutor);
+            if ($autor !== null) {
+                $autores[] = $autor;
+            }
         }
-        
+        $parametros['autorList'] = $autores;
         $Libro = new Libro(
-            id:null,
+            id: null,
             titulo: $parametros['titulo'],
-            autorList:$parametros["autor"],
-            editorial:$parametros["editorial"],
-            cant_paginas:$parametros["cant_paginas"],
-            anio:$parametros['anio'],
-            genero:$parametros['genero'],
-            categoria:$parametros["categoria"],
-            
+            autorList: $parametros['autorList'],
+            editorial: $parametros['editorial'],
+            cant_paginas: $parametros['cant_paginas'],
+            anio: $parametros['anio'],
+            genero: $parametros['genero'],
+            categoria: $parametros['categoria'],
         );
+    
         LibroDAO::crear($Libro);
         return $Libro->serializar();
     }
-
+    
     public static function actualizar(array $parametros): array
     {
         $Libro = Libro::deserializar($parametros);

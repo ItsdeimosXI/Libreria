@@ -11,7 +11,6 @@ class LibroDAO implements InterfaceDAO
 {
     public static function listar(): array
     {
-        
         $sql = 'SELECT *  FROM  libros';
         $cnx = ConectarBD::conectar();
         $consulta = $cnx->prepare($sql);
@@ -23,10 +22,9 @@ class LibroDAO implements InterfaceDAO
             $libro['genero'] = GeneroDAO::encontrarUno($libro['id_genero']);
             $libro['editorial'] = EditorialDAO::encontrarUno($libro['id_editorial']);
             $libro['autor'][] = static::buscarEscritoresporLibro($libro["id"]);
-         
             $libros[] = Libro::deserializar($libro);
         }
-        
+        //var_dump($libros);
         return $libros;
     }
     public static function buscarEscritoresporLibro($id)
@@ -64,36 +62,42 @@ class LibroDAO implements InterfaceDAO
         }
     }
 
+    
     public static function crear(Serializador $instancia): void
+{
+    $params = $instancia->serializar();
+    $sql = 'INSERT INTO libros (titulo, id_genero, id_categoria, cant_paginas, anio, estado, id_editorial) 
+    VALUES (:titulo, :id_genero, :id_categoria, :cant_paginas, :anio, :estado, :id_editorial);';
+    ConectarBD::escribir(
+        sql: $sql,
+        params: [
+            ':titulo' => $params['titulo'],
+            ':id_genero' => $params['genero']['id'],
+            ':id_categoria' => $params['categoria']['id'],
+            ':cant_paginas' => $params['cant_paginas'],
+            ':anio' => $params['anio'],
+            ':estado' => $params['estado'],
+            ':id_editorial' => $params['editorial']['id'],
+        ]
+        
+    );
+    $idLibro = static::buscarUltimoLibro();
+    foreach ($params['autor'] as $autor) 
     {
-        $params = $instancia->serializar();
-        $sql = 'INSERT INTO libros (titulo, id_genero, id_categoria, cant_paginas, anio, estado, id_editorial) 
-        VALUES (:titulo, :id_genero, :id_categoria, :cant_paginas, :anio, :estado, :id_editorial);';
+        $sql = 'INSERT INTO autores_libros (id_autor, id_libro) 
+        VALUES (:id_autor, :id_libro)';
         ConectarBD::escribir(
+            
             sql: $sql,
             params: [
-                ':titulo' => $params['titulo'],
-                ':id_genero' => $params['genero']->getId(),
-                ':id_categoria' => $params['categoria']->getId(),
-                ':cant_paginas' => $params['cant_paginas'],
-                ':anio' => $params['anio'],
-                ':estado' => $params['estado'],
-                ':id_editorial' => $params['editorial']->getId(),
+                ':id_libro' => $idLibro,
+                ':id_autor' => $autor['id'],
             ]
+            
         );
-        
-        foreach ($params['autor'] as $autor) {
-            $sql = 'INSERT INTO autores_libros (id_autor, id_libro) 
-            VALUES ( :id_autor, :id_libro)';
-            ConectarBD::escribir(
-                sql: $sql,
-                params: [
-                    ':id_libro' => static::buscarUltimoLibro(),
-                    ':id_autor' => $autor[0],
-                ]
-            );
-        }
     }
+}
+
 
     public static function actualizar(Serializador $instancia): void
     {

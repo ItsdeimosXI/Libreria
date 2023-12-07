@@ -74,7 +74,7 @@ class Libro extends ModelBase
     {
         $listaAutores =[];
         foreach($this->autor as $autores){
-            $listaAutores = $autores->serializar();
+            $listaAutores[] = $autores->serializar();
         }
         return $listaAutores;
         

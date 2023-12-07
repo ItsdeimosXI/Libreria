@@ -5,9 +5,9 @@
             <div class="mask d-flex align-items-center h-100">
             <div class="container">
                 <div class="input-goup mb-3">
-                    <router-link :to="{name: 'CrearEditoriales'}">
+                    <router-link :to="{name: 'CrearLibro'}">
                         <button class="btn btn-success">
-                       <i class="fa-solid fa-check"> </i>Crear nueva Libro
+                       <i class="fa-solid fa-check"> </i>Crear nuevo Libro
                     </button>
                     </router-link>
                 </div>
