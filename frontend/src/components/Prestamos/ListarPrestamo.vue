@@ -5,9 +5,9 @@
             <div class="mask d-flex align-items-center h-100">
             <div class="container">
                 <div class="input-goup mb-3">
-                    <router-link :to="{name: 'CrearGeneros'}">
+                    <router-link :to="{name: 'prestamocrear'}">
                         <button class="btn btn-success">
-                       <i class="fa-solid fa-check"> </i>Crear nuevo genero
+                       <i class="fa-solid fa-check"> </i>Crear nuevo prestamo
                     </button>
                     </router-link>
                 </div>
@@ -18,17 +18,19 @@
          <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col">Socio</th>
+                    <th scope="col">Libro</th>
                 </tr>
         </thead>
             <tbody>
-                <tr v-for="genero in generos" :key="genero.id">
-                    <th scope="row" style="color: #666666;">{{genero.id}}</th>
-                    <td>{{genero.descripcion}}
+                <tr v-for="prestamo in prestamos" :key="prestamo.id">
+                    <th scope="row" style="color: #666666;">{{prestamo.id}}</th>
+                    <td>{{prestamo.id}}
                     </td>
+                    <td>{{ prestamo.socio.nombre_apellido }}</td>
+                    <td>{{ prestamo.libro.titulo  }}</td>
                     <td>
-                    <router-link :to="{path: '/generos/actualizar/'+genero.id}" class="btn btn-warning">
+                    <router-link :to="{path: '/Prestamo/actualizar/'+genero.id}" class="btn btn-warning">
                     <i class="fa-solid fa-edit"></i> 
                     </router-link> &nbsp;
                     <button class="btn btn-danger" @click="eliminar(genero.id, genero.descripcion)"> 
@@ -55,22 +57,22 @@ export default{
     
     data() {
         return{
-            generos:null,
+            prestamos:null,
         }
     },
     mounted(){
-        this.getGeneros();
+        this.getPrestamo();
     },
     methods:{
-        getGeneros(){
-            axios.get('http://127.0.0.1:8000/apiv1/generos').then(
+        getPrestamo(){
+            axios.get('http://127.0.0.1:8000/apiv1/prestamos').then(
                 response => (
-                    this.generos = response.data
+                    this.prestamos = response.data
                 )
             );
 
         },
-        eliminar(id: any, descripcion: any, url='http://127.0.0.1:8000/apiv1/generos', mensaje = 'Genero eliminado', href ='/generos'){
+        eliminar(id: any, descripcion: any, url='http://127.0.0.1:8000/apiv1/prestamos', mensaje = 'Prestamo eliminado', href ='/Prestamo'){
             confirmar(id, descripcion, url, mensaje, href)
         }
     }

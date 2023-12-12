@@ -99,18 +99,28 @@ class LibroDAO implements InterfaceDAO
 }
 
 
-    public static function actualizar(Serializador $instancia): void
-    {
-        $params = $instancia->serializar();
-        $sql = 'UPDATE libros SET nombre =:nombre WHERE id=:id';
-        ConectarBD::escribir(
-            sql: $sql,
-            params: [
-                ':id' => $params['id'],
-                ':nombre' => $params['nombre'],
-            ]
-        );
-    }
+public static function actualizar(Serializador $instancia): void
+{
+
+    $params = $instancia->serializar(); 
+    $sql = 'UPDATE libros SET titulo =:titulo, id_genero = :id_genero, id_categoria = :id_categoria, 
+            cant_paginas = :cant_paginas, anio = :anio, estado = :estado, id_editorial = :id_editorial 
+            WHERE id=:id';  
+    ConectarBD::escribir(
+        sql: $sql,
+        params: [
+            ':id' => $params['id'],
+            ':titulo' => $params['titulo'],
+            ':id_genero' => $params['genero']['id'],
+            ':id_categoria' => $params['categoria']['id'],
+            ':cant_paginas' => $params['cant_paginas'],
+            ':anio' => $params['anio'],
+            ':estado' => $params['estado'],
+            ':id_editorial' => $params['editorial']['id'],
+        ]
+    );
+    
+}
     public static function buscarUltimoLibro():int{
         $sql = 'SELECT MAX(id) as id FROM libros ';
         $cnx = ConectarBD::conectar();

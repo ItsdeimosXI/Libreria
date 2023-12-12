@@ -15,6 +15,9 @@
               <router-link :to="{name: 'Libros'}" class="nav-link" router-limk>Libros</router-link>
             </li>
             <li class="nav-item">
+              <router-link :to="{name: 'prestamo'}" class="nav-link" router-limk>Prestamos</router-link>
+            </li>
+            <li class="nav-item">
               <router-link :to="{name: 'Generos'}" class="nav-link">Generos</router-link>
             </li>
             <li class="nav-item">

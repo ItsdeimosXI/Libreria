@@ -34,7 +34,7 @@ export default {
     data(){
         return {
         descripcion: '',
-         url: 'http://127.0.0.1:8000/apiv1/editoriales/nuevo'
+         url: 'http://127.0.0.1:8000/apiv1/categorias/nuevo'
         }    
     },
     methods:{

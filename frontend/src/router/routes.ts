@@ -15,6 +15,8 @@ import CrearCategorias from '../components/Categorias/CrearCategorias.vue';
 import ListarCategorias from '../components/Categorias/ListarCategorias.vue';
 import CrearEditoriales from '../components/Editoriales/CrearEditoriales.vue';
 import ListarEditoriales from '../components/Editoriales/ListarEditoriales.vue';
+import PrestamoCrear from '../components/Prestamos/CrearPrestamo.vue';
+import PrestamoListar from '../components/Prestamos/ListarPrestamo.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -72,6 +74,16 @@ const router = createRouter({
       path: '/Autores',
       name: 'Autores',
       component: ListarAutores
+    },
+    {
+      path: '/Prestamo',
+      name: 'prestamo',
+      component: PrestamoListar
+    },
+    {
+      path: '/Prestamo/crear',
+      name: 'prestamocrear',
+      component: PrestamoCrear
     },
     {
       path: '/Autores/crear',

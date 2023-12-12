@@ -10,7 +10,7 @@ class Libro extends ModelBase
     private $titulo;
     /** @var Editorial */
     private $editorial;
-    /** @var array Autor */
+    /** @var array array<Autor> */
     private array $autor;
     /** @var Genero */
     private $genero;
@@ -129,6 +129,14 @@ class Libro extends ModelBase
                 $this->estado = static::PRESTADO;
         }
     }
+    public function serializarAutores(): array
+    {
+        $autor = [];
+        foreach ($this->autor as $autores){
+            $autor[] = $autores->serializar();
+        }
+        return $autores;
+    }
 
     public function serializar(): array
     {
@@ -144,18 +152,18 @@ class Libro extends ModelBase
             'anio'=>$this->anio
         ];
     }
-    static function deserializar(array $datos): ModelBase
+    static function deserializar(array $parametros): ModelBase
     {
         return new Self(
-            id: $datos['id'] === null ? 0 : $datos['id'],
-            titulo: $datos['titulo'],
-            autorList: $datos['autor'],
-            editorial: $datos['editorial'],
-            cant_paginas: $datos['cant_paginas'],
-            anio: $datos['anio'],
-            genero: $datos['genero'],
-            categoria: $datos['categoria'],
-            estado: $datos['estado']
+            id: $parametros['id'],
+            titulo: $parametros['titulo'],
+            autorList: $parametros['autor'],
+            editorial: $parametros['editorial'],
+            cant_paginas: $parametros['cant_paginas'],
+            anio: $parametros['anio'],
+            genero: $parametros['genero'],
+            categoria: $parametros['categoria'],
+            estado: $parametros['estado']
         );
     }
 }

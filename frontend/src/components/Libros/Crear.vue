@@ -13,19 +13,38 @@
                                 </i>
                                 <label for="basic-url" class="form-label">Titulo</label>
                             </span>
-                            <input type="text" class="form-control" maxlength="20" placeholder="Titulo" required
+                            <input type="text" class="form-control" maxlength="256" placeholder="Titulo" required
                                 v-model="titulo">
-                            <span class="input-group-text">
-                                <i class="fa-solid fa-commenting">
-                                </i>
-                                <label >Autores</label>
-                            </span>
-                            <select class="form-select" aria-label="Default select example" v-model="autor"
-                                required>
-                                <option v-for="autor in autores" :key="autor.id" :value="autor.id">{{ autor.nombre_apellido
-                                }}
-                                </option>
-                            </select>
+                               
+                                    <span class="input-group-text">
+                                      <i class="fa-solid fa-commenting"></i>
+                                      <label class="form-label">Autores</label>
+                                    </span>
+                                    <div class="d-flex flex-column">
+                                      <div class="input-group">
+                                        <select
+                                          class="form-select"
+                                          v-model="nuevoAutor"
+                                          @change="agregarNuevoAutor"
+                                        >
+                                          <option value="" disabled selected>Selecciona un autor</option>
+                                          <option v-for="autor in autoresDisponibles" :key="autor.id" :value="autor.id">
+                                            {{ autor.nombre_apellido }}
+                                          </option>
+                                        </select>
+                                      
+                                      </div>
+                                      <div v-for="(autor, index) in autores" :key="index">
+                                        <span>{{ autor.nombre_apellido }}</span>
+                                        <button
+                                          type="button"
+                                          class="btn btn-danger btn-sm"
+                                          @click="eliminarAutor(index)"
+                                        >
+                                          Eliminar
+                                        </button>
+                                      </div>
+                                </div>
                             <span class="input-group-text">
                                 <i class="fa-solid fa-commenting">
                                 </i>
@@ -103,20 +122,19 @@ import { show_alerta, enviarSolicitud } from '../Funciones/Funciones.js';
 export default {
     data() {
         return {
+            autores: [], 
+            nuevoAutor: null, 
             titulo: '',
-            autor: [],
             editorial: '',
             cant_paginas: '',
             categoria: '', // Id de la categoría seleccionada
             genero: '',    // Id del género seleccionado
             estado: 'activo',
             anio: '',
-            autores: [],
             editoriales: [],
             categorias: [], // Cargar las categorías existentes
             generos: [],
             url: 'http://127.0.0.1:8000/apiv1/libros/nuevo',
-            aut: [],
         }
     },
     methods: {
@@ -141,44 +159,38 @@ export default {
                 show_alerta('Seleccione la editorial', 'warning', 'editorial');
             }
             else {
-                var parametros = { titulo: this.titulo.trim(), id_genero: this.genero, id_categoria: this.categoria, cant_paginas: this.cant_paginas, anio: this.anio, estado: this.estado, id_editorial: this.editorial, id_autor: [1]};
+                var parametros = { titulo: this.titulo.trim(), id_genero: this.genero, id_categoria: this.categoria, cant_paginas: this.cant_paginas, anio: this.anio, estado: this.estado, id_editorial: this.editorial, id_autor: this.autores.map((autor) => autor.id)};
                 enviarSolicitud('POST', parametros, this.url, 'Libro guardado', '/libros');
             }
         },
-        LlamadoParaDemas() {
-            // Realizar solicitudes a la API para obtener categorías y géneros
-            axios.get('http://127.0.0.1:8000/apiv1/categorias')
-                .then(response => {
-                    this.categorias = response.data;
-                })
-                .catch(error => {
-                    console.error('Error al obtener categorías:', error);
-                });
+        async LlamadoParaDemas() {
+      try {
+        const [categorias, generos, autores, editoriales] = await Promise.all([
+          axios.get('http://127.0.0.1:8000/apiv1/categorias'),
+          axios.get('http://127.0.0.1:8000/apiv1/generos'),
+          axios.get('http://127.0.0.1:8000/apiv1/autores'),
+          axios.get('http://127.0.0.1:8000/apiv1/editoriales'),
+        ]);
 
-            axios.get('http://127.0.0.1:8000/apiv1/generos')
-                .then(response => {
-                    this.generos = response.data;
-                })
-                .catch(error => {
-                    console.error('Error al obtener géneros:', error);
-                });
-            // Realizar solicitudes a la API para obtener categorías y géneros
-            axios.get('http://127.0.0.1:8000/apiv1/autores')
-                .then(response => {
-                    this.autores = response.data;
-                })
-                .catch(error => {
-                    console.error('Error al obtener categorías:', error);
-                });
-
-            axios.get('http://127.0.0.1:8000/apiv1/editoriales')
-                .then(response => {
-                    this.editoriales = response.data;
-                })
-                .catch(error => {
-                    console.error('Error al obtener géneros:', error);
-                });
-        },
+        this.categorias = categorias.data;
+        this.generos = generos.data;
+        this.autoresDisponibles = autores.data;
+        this.editoriales = editoriales.data;
+      } catch (error) {
+        console.error('Error al obtener datos:', error);
+      }
+    },
+    agregarNuevoAutor() {
+      if (this.nuevoAutor) {
+        const autorSeleccionado = this.autoresDisponibles.find(autor => autor.id === this.nuevoAutor);
+        if (autorSeleccionado) {
+          this.autores.push(autorSeleccionado);
+        }
+      }
+    },
+    eliminarAutor(index) {
+      this.autores.splice(index, 1);
+    },
     },
     mounted() {
         // Cargar categorías y géneros al montar el componente

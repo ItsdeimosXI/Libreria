@@ -38,7 +38,9 @@ export function enviarSolicitud(metodo, parametros, url, mensaje, href){
         var status = respuesta.data[0]['status'];
         if(status = 'success'){
             show_alerta(mensaje, status);
-
+            window.setTimeout(function(){
+                window.location.href= href;
+            },1000);
         }
         else {
             var listado = '';
