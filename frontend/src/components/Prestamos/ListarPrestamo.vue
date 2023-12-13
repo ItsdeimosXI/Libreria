@@ -25,15 +25,10 @@
             <tbody>
                 <tr v-for="prestamo in prestamos" :key="prestamo.id">
                     <th scope="row" style="color: #666666;">{{prestamo.id}}</th>
-                    <td>{{prestamo.id}}
-                    </td>
                     <td>{{ prestamo.socio.nombre_apellido }}</td>
                     <td>{{ prestamo.libro.titulo  }}</td>
-                    <td>
-                    <router-link :to="{path: '/Prestamo/actualizar/'+genero.id}" class="btn btn-warning">
-                    <i class="fa-solid fa-edit"></i> 
-                    </router-link> &nbsp;
-                    <button class="btn btn-danger" @click="eliminar(genero.id, genero.descripcion)"> 
+                    <td>&nbsp;
+                    <button class="btn btn-danger" @click="eliminar(prestamo.id, prestamo.socio.nombre_apellido)"> 
                     <i class="fa-solid fa-trash"></i> 
                     </button>
                     </td>

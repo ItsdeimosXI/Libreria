@@ -13,8 +13,10 @@ class Prestamo extends ModelBase
     private  $fecha_desde;
     private  $fecha_hasta;
     private  $fecha_dev;
-    public function __construct(Socio $socio, Libro $libro, string $fecha_desde, string $fecha_hasta, $fecha_dev = null)
+    public function __construct($id,Socio $socio, Libro $libro, string $fecha_desde, string $fecha_hasta, $fecha_dev = null)
+    
     {
+        parent::__construct($id);
         $this->socio = $socio;
         $this->libro = $libro;
         $this->fecha_desde =  date_create($fecha_desde);
@@ -55,7 +57,7 @@ class Prestamo extends ModelBase
     }
     public function GetFechaDev()
     {
-        $this->fecha_dev;
+        return $this->fecha_dev;
     }
     public function SetFechaDev($fecha_dev)
     {
@@ -73,6 +75,7 @@ class Prestamo extends ModelBase
     public static function deserializar(array $datos): self
     {
         return new Prestamo(
+            id: $datos['id'],
             socio: $datos["socio"],
             libro: $datos["libro"],
             fecha_desde: $datos["fecha_desde"],
@@ -83,11 +86,12 @@ class Prestamo extends ModelBase
     public function serializar(): array
     {
         $serializar = array(
+            'id' => $this->getId(),
             "socio" => $this->GetSoscio()->serializar(),
             "libro" => $this->GetLibro()->serializar(),
             "fecha_desde" =>  date_format($this->GetFechaDesde(), "Y-m-d"),
             "fecha_hasta" => date_format($this->GetFechaHasta(), "Y-m-d"),
-            "fecha_dev" => $this->GetFechaDev() === null ? null : date_format($this->GetFechaDev(), "Y-m-d")
+            "fecha_dev" => $this->GetFechaDev() === null ? null : date_format($this->GetFechaDev(), "Y-m-d"),
         );
         return $serializar;
     }

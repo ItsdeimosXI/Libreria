@@ -62,13 +62,13 @@ class PrestamoDAO implements InterfaceDAO
     public static function crear(Serializador $instancia): void
     {
         $params = $instancia->serializar();
-        $sql = 'INSERT INTO prestamo (socio , libro, fecha_desde, fecha_hasta, $fecha_dev) 
+        $sql = 'INSERT INTO prestamos (id_socio , id_libro, fecha_desde, fecha_hasta, fecha_dev) 
         VALUES (:socio, :libro, :fecha_desde, :fecha_hasta, :fecha_dev);';
         ConectarBD::escribir(
             sql: $sql,
             params: [
-                ':socio' => $params['socio']->getId(),
-                ':libro' => $params['libro']->getId(),
+                ':socio' => $params['socio']['id'],
+                ':libro' => $params['libro']['id'],
                 ':fecha_desde' => $params['fecha_desde'],
                 ':fecha_hasta' => $params['fecha_hasta'],
                 ':fecha_dev' => $params['fecha_dev'],

@@ -1,7 +1,9 @@
 <?php
 namespace Raiz\Controllers;
 
+use Raiz\Bd\LibroDAO;
 use Raiz\Bd\PrestamoDAO;
+use Raiz\Bd\SocioDAO;
 use Raiz\Models\Prestamo;
 
 class PrestamoController implements InterfaceController{
@@ -39,9 +41,20 @@ class PrestamoController implements InterfaceController{
 
     public static function crear(array $parametros): array
     {
-        $Prestamo = Prestamo::deserializar($parametros);
-        PrestamoDAO::crear($Prestamo);
-        return $Prestamo->serializar();
+        $socioID = $parametros['socio'];
+        $libroID = $parametros['libro'];
+        
+
+        $socioDeserializado= SocioDAO::encontrarUno($socioID);
+        $libroDeserializado= LibroDAO::encontrarUno($libroID);
+
+        $parametros['socio'] = $socioDeserializado;
+        $parametros['libro'] = $libroDeserializado;
+
+        $prestamo = Prestamo::deserializar($parametros);
+
+        PrestamoDAO::crear($prestamo);
+        return $prestamo->serializar();
     }
 
     public static function actualizar(array $parametros): array
@@ -56,11 +69,21 @@ class PrestamoController implements InterfaceController{
         PrestamoDAO::borrar($id);
         
     }
-    public static function verificarLibroDevuelvo(){
-
+    public static function verificarLibroDevuelto(string $id): bool {
+        $prestamo = PrestamoDAO::encontrarUno($id);
+        if ($prestamo === null) {
+            return false;
+        }
+        
+        return $prestamo->getFechaDev() !== null;
     }
 
-    public static function calcularDiasRetraso( ){
-        
+    public static function calcularDiasRetraso(string $id): int {
+        $prestamo = PrestamoDAO::encontrarUno($id);
+        if ($prestamo === null) {
+            return 0;
+        }
+    
+        return $prestamo->diasderetraso();
     }
 }

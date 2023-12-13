@@ -25,16 +25,10 @@ class LibroController implements InterfaceController{
     {
         $libros = [];
         $listadoLibros = LibroDAO::listar();
-     
         foreach($listadoLibros as $libro){
-        
             $libros[] = $libro->serializar();
-            
         }
-        
         return $libros;
-
-        
     }
     
     public static function encontrarUno(string $id): ?array

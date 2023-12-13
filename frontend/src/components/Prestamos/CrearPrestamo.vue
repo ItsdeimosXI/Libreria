@@ -21,9 +21,13 @@
                                 <label for="">Libro</label>
                             </span>
                             <select class="form-select" aria-label="Default select example" v-model="Libro" required>
-                                <option v-for="libro in libros" :key="libro.id" :value="libro.id">{{ libro.titulo }}
+                                <option v-for="libro in librosFiltrados" :key="libro.id" :value="libro.id">{{ libro.titulo }}
                                 </option>
                             </select>
+                            <label for="">Fecha Desde:</label>
+                            <input type="date" class="form-date" v-model="FechaDesde">
+                            <label>Fecha Hasta:</label>
+                            <input type="date" class="form-date" v-model="FechaHasta">
                         </div>
                         <div class="d-grid col-6 mx-auto">
                             <button class="btn btn-success">
@@ -48,12 +52,19 @@ export default {
             Libro: null,
             libros: [],
             socios: [],
+            prestamos: [],
+            FechaDesde: null,
+            FechaHasta: null,
         }
     },
     computed: {
         // Filtrar la lista de socios excluyendo aquellos que ya tienen un préstamo
         sociosFiltrados(): any {
             return this.socios.filter(socio => !this.tienePrestamo(socio.id));
+        },
+        librosFiltrados() {
+            console.log(this.libros);
+            return this.libros.filter(libro => (libro.estado.toLowerCase() !== 'prestado'));
         }
     },
     methods: {
@@ -63,20 +74,28 @@ export default {
             show_alerta('Selecciona el socio', 'warning', 'socio');
             } else if(this.Libro === ''){
                 show_alerta('Selecciona el libro', 'warning', 'libro');
+            }else if(this.FechaDesde === ''){
+                show_alerta('Selecciona la fecha', 'warning', 'fecha');
             }
+            else if(this.FechaHasta === ''){
+                show_alerta('Selecciona la fecha', 'warning', 'fecha');
+            }
+
             else {
-                var parametros = { };
-                enviarSolicitud('POST', parametros, this.url, 'Libro guardado', '/libros');
+                var parametros = { socio : this.Socio, libro: this.Libro, fecha_hasta: this.FechaHasta, fecha_desde: this.FechaDesde};
+                enviarSolicitud('POST', parametros, this.url, 'Prestamo guardado', '/');
             }
         },
         async LlamadoParaDemas() {
             try {
-                const [libros, socios] = await Promise.all([
+                const [libros, socios, prestamos] = await Promise.all([
                     axios.get('http://127.0.0.1:8000/apiv1/libros'),
                     axios.get('http://127.0.0.1:8000/apiv1/socios'),
+                    axios.get('http://127.0.0.1:8000/apiv1/prestamos'),
                 ]);
                 this.libros = libros.data;
                 this.socios = socios.data;
+                this.prestamos = prestamos.data;
             } catch (error) {
                 console.error('Error al obtener datos:', error);
             }
