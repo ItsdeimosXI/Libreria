@@ -86,6 +86,17 @@ class PrestamoDAO implements InterfaceDAO
                 ]
             );
         }
+        $params = $instancia->serializar();
+        var_dump($params);
+        $sql = 'UPDATE libros SET estado = :estado WHERE id=:id';
+        ConectarBD::escribir(
+            sql: $sql,
+            params: [
+                ':id' =>  $params['libro']['id'],
+                ':estado'  =>  'prestado'
+            ],
+        );
+        
     }
 
     public static function actualizar(Serializador $instancia): void

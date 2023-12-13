@@ -98,9 +98,9 @@
                                 <label for="">Estado actual</label>
                             </span>
                             <select class="form-select" aria-label="Default select example" v-model="estado">
-                                <option value="ACTIVO">Activo</option>
-                                <option value="INACTIVO">Inactivo</option>
-                                <option value="PRESTADO">Prestado</option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                                <option value="Prestado">Prestado</option>
                               </select>
                         </div>
                         <div class="d-grid col-6 mx-auto">
@@ -129,7 +129,7 @@ export default {
             cant_paginas: '',
             categoria: '', // Id de la categoría seleccionada
             genero: '',    // Id del género seleccionado
-            estado: 'activo',
+            estado: 'Activo',
             anio: '',
             editoriales: [],
             categorias: [], // Cargar las categorías existentes
