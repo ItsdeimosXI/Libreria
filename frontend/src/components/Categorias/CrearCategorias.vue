@@ -3,7 +3,7 @@
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-header bg-dark text-white text-center">
-                    Crear Nueva Editorial
+                    Crear Nueva Categoria
                 </div>
         <div class="card-body">
             <form v-on:submit="guardar">
@@ -12,7 +12,7 @@
                         <i class="fa-solid fa-commenting">
                         </i>
                     </span>
-                    <input type="text" id="descripcion" class="form-control" maxlength="20" placeholder="Editorial" required v-model="descripcion">
+                    <input type="text" id="descripcion" class="form-control" maxlength="20" placeholder="Categoria" required v-model="descripcion">
                 </div>
                 <div class="d-grid col-6 mx-auto">
                     <button class="btn btn-success">
@@ -44,7 +44,7 @@ export default {
                 show_alerta('Escribe la Editorial', 'warning', 'descripcion' );
             }else{
                 var parametros = {descripcion: this.descripcion.trim()}
-                enviarSolicitud('POST', parametros, this.url , 'Editorial guardada', '/Editoriales');
+                enviarSolicitud('POST', parametros, this.url , 'Categoria guardada', '/Categorias');
             }
         }
     }

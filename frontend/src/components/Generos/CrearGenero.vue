@@ -12,7 +12,7 @@
                         <i class="fa-solid fa-commenting">
                         </i>
                     </span>
-                    <input type="text" id="descripcion" class="form-control" maxlength="20" placeholder="Genero libro" required v-model="descripcion">
+                    <input type="text" id="descripcion" class="form-control" maxlength="20" placeholder="Genero" required v-model="descripcion">
                 </div>
                 <div class="d-grid col-6 mx-auto">
                     <button class="btn btn-success">

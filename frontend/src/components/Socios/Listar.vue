@@ -42,9 +42,6 @@
         <td>
           <Boton texto="eliminar" v-bind:class="{ warning: true }" @click="borrar(socio.id)"></Boton>
         </td>
-        <td>
-          <Boton texto="abrir" v-bind:class="{ alert: true }"></Boton>
-        </td>
       </tr>
       </template>
       </template>
@@ -65,9 +62,6 @@
         <td>
           <Boton texto="eliminar" v-bind:class="{ warning: true }" @click="borrar(socio.id)"></Boton>
         </td>
-        <td>
-          <Boton texto="abrir" v-bind:class="{ alert: true }"></Boton>
-        </td>
       </tr>
       </template>
       </template>
@@ -86,9 +80,6 @@
         </td>
         <td>
           <Boton texto="eliminar" v-bind:class="{ warning: true }" @click="borrar(socio.id)"></Boton>
-        </td>
-        <td>
-          <Boton texto="abrir" v-bind:class="{ alert: true }"></Boton>
         </td>
       </tr>
       </template>

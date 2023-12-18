@@ -1,4 +1,12 @@
 <template>
-    <h1>Trabajo final</h1>
-    <p>Hecho por manuel salamanca, tecnicatura de desarrolo web segundo año</p>
-</template>
+    <div>
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="display-4">Trabajo Final</h1>
+          <p class="lead">
+            Hecho por Manuel Salamanca, Técnico en Desarrollo Web - Segundo Año
+          </p>
+        </div>
+      </section>
+    </div>
+  </template>

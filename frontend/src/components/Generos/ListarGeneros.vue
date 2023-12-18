@@ -27,10 +27,7 @@
                     <th scope="row" style="color: #666666;">{{genero.id}}</th>
                     <td>{{genero.descripcion}}
                     </td>
-                    <td>
-                    <router-link :to="{path: '/generos/actualizar/'+genero.id}" class="btn btn-warning">
-                    <i class="fa-solid fa-edit"></i> 
-                    </router-link> &nbsp;
+                    <td> &nbsp;
                     <button class="btn btn-danger" @click="eliminar(genero.id, genero.descripcion)"> 
                     <i class="fa-solid fa-trash"></i> 
                     </button>

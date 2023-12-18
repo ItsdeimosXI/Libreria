@@ -1,4 +1,5 @@
 <template>
+  <div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-black">
       <div class="container-fluid">
         <router-link :to="{name: 'home'}" class="navbar-brand">Inicio</router-link>
@@ -35,10 +36,19 @@
           </ul>
         </div>
     </div>
+   
   </nav>
   <div class="container-fluid mt-3">
     <router-view></router-view>
   </div>
+
+</div>
+<footer>
+  <Footer/>
+</footer>
 </template>
 
+<script lang="ts" setup>
+import Footer from './components/Footer.vue';
+</script>
 

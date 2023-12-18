@@ -84,7 +84,7 @@ export default {
 
             else {
                 var parametros = { socio : this.Socio, libro: this.Libro, fecha_hasta: this.FechaHasta, fecha_desde: this.FechaDesde, estado: this.libros.estado};
-                enviarSolicitud('POST', parametros, this.url, 'Prestamo guardado', '/');
+                enviarSolicitud('POST', parametros, this.url, 'Prestamo guardado', '/Prestamo');
             }
         },
         async LlamadoParaDemas() {

@@ -67,9 +67,9 @@
                                 <label for="">Estado actual</label>
                             </span>
                             <select class="form-select" aria-label="Default select example" v-model="estado">
-                                <option value="ACTIVO">Activo</option>
-                                <option value="INACTIVO">Inactivo</option>
-                                <option value="PRESTADO">Prestado</option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                                <option value="Prestado">Prestado</option>
                             </select>
                         </div>
                         <div class="d-grid col-6 mx-auto">
@@ -132,7 +132,7 @@ export default {
             }
             else {
                 var parametros = {id: this.id ,titulo: this.titulo.trim(), id_genero: this.genero, id_categoria: this.categoria, cant_paginas: this.cant_paginas, anio: this.anio, estado: this.estado, id_editorial: this.editorial, id_autor: this.autores.map((autor) => autor.id) };
-                enviarSolicitud('PUT', parametros, this.url, 'Libro guardado', '/libros');
+                enviarSolicitud('PUT', parametros, this.url, 'Libro Actualizado', '/libros');
             }
         },
         async LlamadoParaDemas() {

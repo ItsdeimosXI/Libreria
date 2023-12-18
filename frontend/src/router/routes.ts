@@ -8,7 +8,6 @@ import SocioActualizar from '../components/Socios/Actualizar.vue';
 import LibrosListar from '../components/Libros/Listar.vue';
 import LibrosActualizar from '../components/Libros/Actualizar.vue';
 import CrearLibro from '../components/Libros/Crear.vue';
-import ActualizarGeneroVue from '../components/Generos/ActualizarGenero.vue';
 import CrearAutores from '../components/Autores/CrearAutores.vue';
 import ListarAutores from '../components/Autores/ListarAutores.vue';
 import CrearCategorias from '../components/Categorias/CrearCategorias.vue';
@@ -17,6 +16,7 @@ import CrearEditoriales from '../components/Editoriales/CrearEditoriales.vue';
 import ListarEditoriales from '../components/Editoriales/ListarEditoriales.vue';
 import PrestamoCrear from '../components/Prestamos/CrearPrestamo.vue';
 import PrestamoListar from '../components/Prestamos/ListarPrestamo.vue';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -39,11 +39,6 @@ const router = createRouter({
       path: '/generos',
       name: 'Generos',
       component: ListarGeneros
-    },
-    {
-      path: '/generos/actualizar/:id',
-      name: 'Generoactualizar',
-      component: ActualizarGeneroVue
     },
     {
       path: '/generos/crear',

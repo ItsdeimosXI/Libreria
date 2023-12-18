@@ -40,7 +40,7 @@ class PrestamoDAO implements InterfaceDAO
 
     public static function encontrarUno(string $id): ?prestamo
     {
-        $sql = 'SELECT * FROM prestamos WHERE id =:id;';
+        $sql = 'SELECT * FROM prestamos WHERE id =:id';
         $prestamo = ConectarBD::leer(sql: $sql, params: [':id' => $id]);
         if (count($prestamo) === 0) {
             return null;
@@ -111,6 +111,7 @@ class PrestamoDAO implements InterfaceDAO
             ]
         );
     }
+    
     public static function buscarUltimoprestamo():int{
         $sql = 'SELECT MAX(id) as id FROM prestamos ';
         $cnx = ConectarBD::conectar();
@@ -140,5 +141,7 @@ class PrestamoDAO implements InterfaceDAO
     {
         $sql = 'DELETE FROM prestamos WHERE id=:id';
         ConectarBD::escribir(sql: $sql, params: [':id' => $id]);
+
     }
+
 }
