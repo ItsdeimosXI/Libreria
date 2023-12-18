@@ -2,7 +2,7 @@
     <div>
       <section class="jumbotron text-center">
         <div class="container">
-          <h1 class="display-4">¡Bienvenido a tu Biblioteca Virtual!</h1>
+          <h1 class="display-3">¡Bienvenido a tu Biblioteca Virtual!</h1>
           <p class="lead">
             Administra tus libros, socios y préstamos de manera fácil y rápida.
           </p>
