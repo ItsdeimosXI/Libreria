@@ -1,7 +1,7 @@
 ### Programación Web Dinámica **2023**
-## Trabajo Practico N° 4 - MVC
+## Trabajo Final - MVC - PWD 2023
 # MODELOS
-En este trabajo práctico empezaremos a crear nuestras clases que serán los modelos para trabajar en nuestra aplicación.
+En este trabajo final empezaremos a crear nuestras clases que serán los modelos para trabajar en nuestra aplicación.
 
 ---
 Modelar las siguientes clases:
