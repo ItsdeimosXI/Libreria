@@ -88,7 +88,7 @@ export default {
     },
     methods: {
         getLibros() {
-            axios.get('http://127.0.0.1:8000/apiv1/libros').then(
+            axios.get('http://127.0.0.1:8000/api/expediente/').then(
                 response => (
                     this.libros = response.data
                 )

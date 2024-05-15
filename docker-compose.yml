@@ -68,7 +68,7 @@ services:
         networks:
            red_interna:
              ipv4_address: 192.168.20.20
-    frontend:
+    front:
         container_name: frontend
         image: node:lts
         working_dir: /app

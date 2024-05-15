@@ -48,8 +48,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { confirmar } from '../Funciones/Funciones.js';
-export default{
-    
+export default{  
     data() {
         return{
             generos:null,
